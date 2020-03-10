@@ -1,0 +1,97 @@
+<template>
+<div class="app-container">
+    <eHeader :query="query" />
+    <!--表格渲染-->
+    <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
+        <el-table-column label="详情" width="50px">
+            <el-table-column prop="voucher_number" label="凭证编号" width="116px" />
+            <el-table-column prop="customer_name" label="客户名" width="80px" />
+            <el-table-column prop="mobile" label="手机" width="96px" />
+            <el-table-column prop="gross_weight" label="毛重(吨)" width="70px" />
+            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="70px" />
+            <el-table-column prop="sub_weight" label="扣量(吨)" width="70px" />
+            <el-table-column prop="net_weight" label="净重(吨)" width="70px" />
+            <el-table-column prop="unit_price" label="收购单价" width="70px" />
+            <el-table-column prop="amount_pay" label="应付款" width="80px" />
+            <el-table-column prop="actual_pay" label="已付款" width="80px" />
+            <el-table-column prop="naure_name" label="性质" width="60px" />
+            <el-table-column prop="invoice_date" label="创建时间" width="140px" />
+            <el-table-column prop="update_time" label="更新时间" width="140px" />
+        </el-table-column>
+      <el-table-column label="操作" width="200px" align="center">
+        <template slot-scope="scope">
+          <edit v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :organizations="organizations" :sup_this="sup_this"/>
+          <el-popover
+            v-if="checkPermission(['admin','user_all','user_delete'])"
+            :ref="scope.row.id"
+            placement="top"
+            width="180">
+            <p>确定删除本条数据吗？所有关联的数据将会被清除</p>
+            <div style="text-align: right; margin: 0">
+              <el-button size="mini" type="text" @click="$refs[scope.row.id].doClose()">取消</el-button>
+              <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.id)">确定</el-button>
+            </div>
+            <el-button slot="reference" :disabled="scope.row.id === 1" type="danger" size="mini">删除</el-button>
+          </el-popover>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!--分页组件-->
+    <el-pagination :total="total" style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
+</div>
+</template>
+
+<script>
+import checkPermission from '@/utils/permission'
+import initData from '@/mixins/initData'
+import {
+    parseTime
+} from '@/utils/index'
+import eHeader from './module/header'
+import edit from './module/edit'
+import updatePass from './module/updatePass'
+export default {
+    components: {
+        eHeader,
+        edit,
+        updatePass
+    },
+    mixins: [initData],
+    data() {
+        return {
+            delLoading: false,
+            sup_this: this
+        }
+    },
+    created() {
+        // this.getOrganizations()
+        this.$nextTick(() => {
+            this.init()
+        })
+    },
+    methods: {
+        parseTime,
+        checkPermission,
+        beforeInit() {
+            this.url = 'api/warehousentry/'
+            const sort = 'id'
+            const query = this.query
+            const value = query.value
+            this.params = {
+                page: this.page,
+                size: this.size,
+                ordering: sort,
+                sub_warehous: 1
+            }
+            if (value) {
+                this.params['search'] = value
+            }
+            return true
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

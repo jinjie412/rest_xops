@@ -1,0 +1,42 @@
+[
+    {
+        "model": "graincentre.stok_all",
+        "pk": 0,
+        "fields": {
+            "entry_all": 0,
+            "preserve": 0,
+            "out_all": 0,
+            "now_all": 0
+        }
+    },
+    {
+        "model": "graincentre.stok_all",
+        "pk": 1,
+        "fields": {
+            "entry_all": 0,
+            "preserve": 0,
+            "out_all": 0,
+            "now_all": 0
+        }
+    }
+]
+
+
+
+{
+    "voucher_number": "20200310005004",
+    "customer_name": "张三",
+    "mobile": "13122223333",
+    "gross_weight": 10053,
+    "vehicle_weight": 50,
+    "sub_weight": 3,
+    "net_weight": 10000,
+    "unit_price": 1,
+    "amount_pay": "0.0000",
+    "actual_pay": 111,
+    "naure": 1,
+    "invoice_date": "2020-03-10 00:50:59",
+    "update_time": "2020-03-10 00:50:59"
+}
+
+
