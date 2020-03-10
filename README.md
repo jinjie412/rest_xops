@@ -6,18 +6,18 @@ demo地址: http://demo.xufqing.cn
 
 管理员账号:admin 密码admin@1234
 
-![1.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/1.png)
+![1.png](/demo/1.png)
 
-![2.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/2.png)
+![2.png](/demo/2.png)
 
-![3.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/3.png)
+![3.png](/demo/3.png)
 
-![4.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/4.png)
+![4.png](/demo/4.png)
 
 **持续构建样例**
 
-![11.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/11.png)
-![22.png](https://raw.githubusercontent.com/xufqing/rest_xops/master/demo/22.png)
+![11.png](/demo/11.png)
+![22.png](/demo/22.png)
 
 ***特色功能开发进度***
 
@@ -226,9 +226,9 @@ mkdir -p /var/log/rest_xops
 vim /etc/supervisord.d/celery_worker.ini
 
 [program:celery-worker]
-command=/home/xufeng/.pyenv/versions/rest_xops/bin/celery worker -A rest_xops -l INFO
-directory=/home/xufeng/rest_xops
-environment=PATH="/home/xufeng/.pyenv/versions/rest_xops/bin/"
+command=/Applications/miniconda3/envs/xops/bin/celery worker -A rest_xops -l INFO
+directory=/Users/jin/rest_xops
+environment=PATH="/Applications/miniconda3/envs/xops/bin"
 stdout_logfile=/var/log/rest_xops/worker_celery.log
 stderr_logfile=/var/log/rest_xops/worker_celery.log
 autostart=true
@@ -237,9 +237,9 @@ priority=901
 
 #flower是celery的监控，请注意修改redis连接
 [program:celery-flower]
-command=/home/xufeng/.pyenv/versions/rest_xops/bin/celery flower --broker=redis://localhost:6379/1
-directory=/home/xufeng/rest_xops
-environment=PATH="/home/xufeng/.pyenv/versions/rest_xops/"
+command=/Applications/miniconda3/envs/xops/bin/celery flower --broker=redis://localhost:6379/1
+directory=/Users/jin/rest_xops
+environment=PATH="/Applications/miniconda3/envs/xops/bin"
 stdout_logfile=/var/log/rest_xops/flower_celery.log
 stderr_logfile=/var/log/rest_xops/flower_celery.log
 autostart=true

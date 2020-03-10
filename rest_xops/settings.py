@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'rbac',
     'cmdb',
     'deployment',
-
+    'graincentre'
 ]
 
 MIDDLEWARE = [
@@ -86,18 +87,23 @@ WSGI_APPLICATION = 'rest_xops.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'rest_xops',
+#         'HOST': 'localhost',
+#         'USER': 'root',
+#         'PASSWORD': '123456',
+#         'PORT': '3306',
+#         'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rest_xops',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'PORT': '3306',
-        'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -133,7 +139,7 @@ JWT_AUTH = {
 }
 # redis 设置
 REDIS_HOST = 'localhost'
-REDIS_PORT = 16379
+REDIS_PORT = 6379
 REDIS_DB = 0
 REDIS_PASSWORD = None
 
@@ -230,3 +236,23 @@ LOGGING = {
     }
 
 }
+
+
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+ 
+DATE_FORMAT = 'Y-m-d'
+ 
+SUIT_CONFIG = {  # suit页面配置
+    'ADMIN_NAME': '粮库管理平台',  # 登录界面提示
+    'LIST_PER_PAGE': 20,  # 表中显示行数
+    'MENU': ({'label': '入库单', 'app': 'GrainSupplyCentre',
+              'icon': 'icon-lock',  # 显示左边菜单的图标
+              'models': ('customer_name', 'mobile')},  # 每一个字典表示左侧菜单的一栏
+             ),
+    # label表示name，app表示上边的install的app，models表示用了哪些models
+}
+
+
+
+
+

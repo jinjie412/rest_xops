@@ -280,6 +280,7 @@ class UserBuildMenuView(APIView):
     def get(self, request):
         if request.user.id is not None:
             menu_data = self.get_all_menus(request)
+            # print('UserBuildMenuView: ',menu_data)
             return XopsResponse(menu_data, status=OK)
         else:
             return XopsResponse('请登录后访问!',status=FORBIDDEN)
