@@ -1,28 +1,34 @@
 # @Time    : 2019/1/12 21:03
 # @Author  : xufqing
-from ..models import UserProfile, Menu
+from operator import itemgetter
+
+import jwt
+from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
-from ..serializers.user_serializer import UserListSerializer, UserCreateSerializer, UserModifySerializer, UserInfoListSerializer
-from ..serializers.menu_serializer import MenuSerializer
-from rest_framework.generics import ListAPIView
-from common.custom import CommonPagination, RbacPermission
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
-from rest_framework.views import APIView
-from rest_xops.basic import XopsResponse
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from django.contrib.auth import authenticate
-from rest_framework_jwt.settings import api_settings
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
-from rest_xops.settings import SECRET_KEY
-from operator import itemgetter
-from rest_xops.code import *
-from deployment.models import Project
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_jwt.settings import api_settings
+
 from cmdb.models import ConnectionInfo
-from django.db.models import Q
-import jwt
+from common.custom import CommonPagination, RbacPermission
+from deployment.models import Project
+from rest_xops.basic import XopsResponse
+from rest_xops.code import *
+from rest_xops.settings import SECRET_KEY
+
+from ..models import Menu, UserProfile
+from ..serializers.menu_serializer import MenuSerializer
+from ..serializers.user_serializer import (UserCreateSerializer,
+                                           UserInfoListSerializer,
+                                           UserListSerializer,
+                                           UserModifySerializer)
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -39,7 +45,7 @@ class UserAuthView(APIView):
         user = authenticate(username=username, password=password)
         if user:
             payload = jwt_payload_handler(user)
-            return XopsResponse({'token': jwt.encode(payload, SECRET_KEY)},status=OK)
+            return XopsResponse({'token': jwt.encode(payload, SECRET_KEY)}, status=OK)
         else:
             return XopsResponse('用户名或密码错误!', status=BAD)
 
@@ -68,17 +74,19 @@ class UserInfoView(APIView):
                 'avatar': request._request._current_scheme_host + '/media/' + str(request.user.image),
                 'email': request.user.email,
                 'is_active': request.user.is_active,
-                'createTime':request.user.date_joined,
+                'createTime': request.user.date_joined,
                 'roles': perms
             }
             return XopsResponse(data, status=OK)
         else:
             return XopsResponse('请登录后访问!', status=FORBIDDEN)
 
+
 class UserBuildMenuView(APIView):
     '''
     绑定当前用户菜单信息
     '''
+
     def get_menu_from_role(self, request):
         if request.user:
             menu_dict = {}
@@ -272,7 +280,8 @@ class UserBuildMenuView(APIView):
                 parent.setdefault('redirect', 'noredirect')
                 parent.setdefault('alwaysShow', True)
                 parent.setdefault('children', []).append(tree_dict[i])
-                parent['children'] = sorted(parent['children'], key=itemgetter('sort'))
+                parent['children'] = sorted(
+                    parent['children'], key=itemgetter('sort'))
             else:
                 tree_data.append(tree_dict[i])
         return tree_data
@@ -283,7 +292,7 @@ class UserBuildMenuView(APIView):
             # print('UserBuildMenuView: ',menu_data)
             return XopsResponse(menu_data, status=OK)
         else:
-            return XopsResponse('请登录后访问!',status=FORBIDDEN)
+            return XopsResponse('请登录后访问!', status=FORBIDDEN)
 
 
 class UserViewSet(ModelViewSet):
@@ -330,7 +339,8 @@ class UserViewSet(ModelViewSet):
                 user_id = project['user_id'].split(',')
                 user_id.remove(id)
                 user_id = ','.join(user_id)
-                Project.objects.filter(id=project['id']).update(user_id=user_id)
+                Project.objects.filter(
+                    id=project['id']).update(user_id=user_id)
         ConnectionInfo.objects.filter(uid_id=id).delete()
         self.perform_destroy(instance)
         return XopsResponse(status=NO_CONTENT)
@@ -362,6 +372,7 @@ class UserViewSet(ModelViewSet):
                     return XopsResponse('新密码两次输入不一致!', status=status.HTTP_400_BAD_REQUEST)
             else:
                 return XopsResponse('旧密码错误!', status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserListView(ListAPIView):
     queryset = UserProfile.objects.all()

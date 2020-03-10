@@ -85,8 +85,8 @@
 
 <script>
 import {
-    add,
-    edit
+    add, add_w,
+    edit, edit_w
 } from "@/api/graincentre.js";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
@@ -131,16 +131,16 @@ export default {
             loading: false,
             form: {
                 voucher_number: "",
-                customer_name: "",
-                mobile: "",
-                gross_weight: 0,
-                vehicle_weight: 0,
-                sub_weight: 0,
+                customer_name: "张三",
+                mobile: "13888888888",
+                gross_weight: 1110,
+                vehicle_weight: 100,
+                sub_weight: 10,
                 net_weight: 0,
-                unit_price: 0,
+                unit_price: 1,
                 amount_pay: 0,
                 actual_pay: 0,
-                naure: -1,
+                naure: 1,
                 sub_warehous: 1
             },
             rules: {
@@ -157,6 +157,7 @@ export default {
                     }
                 ],
                 mobile: [{
+                    required: true,
                     trigger: "blur",
                     validator: validPhone
                 }],
@@ -221,8 +222,7 @@ export default {
             });
         },
         doAdd() {
-            console.log(this.form)
-            add(this.form)
+            add_w(this.form)
                 .then(res => {
                     this.resetForm();
                     this.$message({
@@ -240,7 +240,7 @@ export default {
                 });
         },
         doEdit() {
-            edit(this.form.id, this.form)
+            edit_w(this.form.voucher_number, this.form)
                 .then(res => {
                     this.resetForm();
                     this.$message({
