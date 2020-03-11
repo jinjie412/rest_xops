@@ -1,20 +1,18 @@
 <template>
 <div class="app-container">
-    <eHeader :query="query" />
+    <eHeader :query="query"/>
     <!--表格渲染-->
     <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
         <el-table-column label="详情" width="50px">
-            <el-table-column prop="voucher_number" label="凭证编号" width="116px" />
-            <el-table-column prop="customer_name" label="客户名" width="80px" />
-            <el-table-column prop="mobile" label="手机" width="96px" />
-            <el-table-column prop="gross_weight" label="毛重(吨)" width="70px" />
-            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="70px" />
-            <el-table-column prop="sub_weight" label="扣量(吨)" width="70px" />
-            <el-table-column prop="net_weight" label="净重(吨)" width="70px" />
-            <el-table-column prop="unit_price" label="单价" width="50px" />
-            <el-table-column prop="amount_pay" label="应付款" width="97px" />
-            <el-table-column prop="actual_pay" label="已付款" width="97px" />
-            <el-table-column prop="naure_name" label="性质" width="60px" />
+            <el-table-column prop="voucher_number" label="凭证编号" width="120px" />
+            <el-table-column prop="customer_name" label="客户名" width="85px" />
+            <el-table-column prop="mobile" label="手机" width="102px" />
+            <el-table-column prop="gross_weight" label="毛重(吨)" width="80px" />
+            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="80px" />
+            <el-table-column prop="net_weight" label="净重(吨)" width="80px" />
+            <el-table-column prop="unit_price" label="收购单价" width="90px" />
+            <el-table-column prop="amount_pay" label="应付款" width="120px" />
+            <el-table-column prop="actual_pay" label="已付款" width="120px" />
             <el-table-column prop="invoice_date" label="创建时间" width="140px" />
             <el-table-column prop="update_time" label="更新时间" width="140px" />
         </el-table-column>
@@ -39,9 +37,7 @@
 
 <script>
 import checkPermission from '@/utils/permission'
-import {
-    del
-} from '@/api/graincentre'
+import { del} from '@/api/graincentre'
 import initData from '@/mixins/initData'
 import {
     parseTime
@@ -58,7 +54,7 @@ export default {
         return {
             delLoading: false,
             sup_this: this,
-            url_path: "warehous"
+            url_path: "warehousout"
         }
     },
     created() {
@@ -71,7 +67,7 @@ export default {
         parseTime,
         checkPermission,
         beforeInit() {
-            this.url = 'api/' + this.url_path + '/'
+            this.url = 'api/' + this.url_path +'/'
             const sort = '-invoice_date'
             const query = this.query
             const value = query.voucher_number
@@ -81,12 +77,12 @@ export default {
                 page: this.page,
                 size: this.size,
                 ordering: sort,
-                sub_warehous: 0
+                sub_warehous: 1
             }
-            if (naure !== "" && naure !== null) {
+            if(naure !== "" && naure !== null){
                 this.params['naure'] = naure
             }
-            if (rangedate && rangedate.length == 2) {
+            if(rangedate && rangedate.length==2){
                 this.params['min_cdate'] = rangedate[0]
                 this.params['max_cdate'] = rangedate[1]
             }

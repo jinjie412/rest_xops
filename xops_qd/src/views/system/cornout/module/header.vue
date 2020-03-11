@@ -4,9 +4,6 @@
     <el-input v-model="query.voucher_number" clearable placeholder="输入关键字搜索" style="width: 200px;" class="filter-item" @keyup.enter.native="toQuery" />
     <el-date-picker v-model="query.rangedate" size="small" value-format="yyyy-mm-dd" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
     </el-date-picker>
-    <el-select v-model="query.naure" clearable placeholder="性质" class="filter-item" style="width: 90px" @change="toQuery">
-        <el-option v-for="item in enabledTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-    </el-select>
     <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="toQuery">搜索</el-button>
     <!-- 新增 -->
     <div style="display: inline-block;margin: 0px 2px;">

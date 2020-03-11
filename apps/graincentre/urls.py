@@ -13,19 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, re_path, include
+from django.contrib import admin
+from django.urls import include, path, re_path
 from rest_framework import routers
 
 from apps.graincentre.views.login import LoginView
 from apps.graincentre.views.out_stock import OutStockView
-from apps.graincentre.views.warehous_entry import WarehousEntryView
 from apps.graincentre.views.warehous import Warehous
+from apps.graincentre.views.warehous_entry import WarehousEntryView
+from apps.graincentre.views.warehousout import Warehousout
 
 router = routers.SimpleRouter()
 router.register(r'warehous', Warehous, base_name='warehous')
+router.register(r'warehousout', Warehousout, base_name='warehousout')
 
 urlpatterns = [
     # re_path(r'login/$', LoginView.as_view()),
+    # path('admin/', admin.site.urls),
     path(r'api/', include(router.urls)),
     re_path(r'api/warehousentry/$', WarehousEntryView.as_view()),
     re_path(r'api/warehousentry/(?P<pk>\d+)/$', WarehousEntryView.as_view()),

@@ -11,9 +11,9 @@
             <el-table-column prop="vehicle_weight" label="皮重(吨)" width="70px" />
             <el-table-column prop="sub_weight" label="扣量(吨)" width="70px" />
             <el-table-column prop="net_weight" label="净重(吨)" width="70px" />
-            <el-table-column prop="unit_price" label="收购单价" width="70px" />
-            <el-table-column prop="amount_pay" label="应付款" width="80px" />
-            <el-table-column prop="actual_pay" label="已付款" width="80px" />
+            <el-table-column prop="unit_price" label="单价" width="50px" />
+            <el-table-column prop="amount_pay" label="应付款" width="97px" />
+            <el-table-column prop="actual_pay" label="已付款" width="97px" />
             <el-table-column prop="naure_name" label="性质" width="60px" />
             <el-table-column prop="invoice_date" label="创建时间" width="140px" />
             <el-table-column prop="update_time" label="更新时间" width="140px" />
@@ -39,7 +39,7 @@
 
 <script>
 import checkPermission from '@/utils/permission'
-import { del, del_w } from '@/api/graincentre'
+import { del} from '@/api/graincentre'
 import initData from '@/mixins/initData'
 import {
     parseTime
@@ -55,7 +55,8 @@ export default {
     data() {
         return {
             delLoading: false,
-            sup_this: this
+            sup_this: this,
+            url_path: "warehous"
         }
     },
     created() {
@@ -68,12 +69,12 @@ export default {
         parseTime,
         checkPermission,
         beforeInit() {
-            this.url = 'api/warehous/'
+            this.url = 'api/' + this.url_path +'/'
             const sort = '-invoice_date'
             const query = this.query
             const value = query.voucher_number
             const naure = query.naure
-            console.log(this.query.range)
+            const rangedate = query.rangedate
             this.params = {
                 page: this.page,
                 size: this.size,
@@ -83,6 +84,10 @@ export default {
             if(naure !== "" && naure !== null){
                 this.params['naure'] = naure
             }
+            if(rangedate && rangedate.length==2){
+                this.params['min_cdate'] = rangedate[0]
+                this.params['max_cdate'] = rangedate[1]
+            }
             if (value) {
                 this.params['search'] = value
             }
@@ -90,7 +95,7 @@ export default {
         },
         subDelete(voucher_number) {
             this.delLoading = true
-            del_w(voucher_number).then(res => {
+            del(voucher_number, this.url_path).then(res => {
                 this.delLoading = false
                 this.$refs[voucher_number].doClose()
                 this.init()

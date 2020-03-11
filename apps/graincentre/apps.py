@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DeploymentConfig(AppConfig):
-    name = 'graincentre'
+    name = 'apps.graincentre'

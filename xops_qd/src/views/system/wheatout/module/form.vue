@@ -21,19 +21,14 @@
             </el-col>
         </el-row>
         <el-row>
-            <el-col :span="8">
+            <el-col :span="12">
                 <el-form-item label="毛重(吨)" prop="gross_weight">
-                    <el-input type="number" v-model.number="form.gross_weight" style="width: 150px;" />
+                    <el-input type="number" v-model.number="form.gross_weight" style="width: 300px;" />
                 </el-form-item>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="12">
                 <el-form-item label="皮重(吨)" prop="vehicle_weight">
-                    <el-input type="number" v-model.number="form.vehicle_weight" style="width: 150px;" />
-                </el-form-item>
-            </el-col>
-            <el-col :span="8">
-                <el-form-item label="扣量(吨)" prop="sub_weight">
-                    <el-input type="number" v-model="form.sub_weight" style="width: 150px;" />
+                    <el-input type="number" v-model.number="form.vehicle_weight" style="width: 300px;" />
                 </el-form-item>
             </el-col>
         </el-row>
@@ -55,13 +50,6 @@
                     <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
                 </el-form-item>
             </el-col>
-        </el-row>
-        <el-row>
-            <el-form-item label="性质" prop="naure">
-                <el-select v-model="form.naure" clearable class="filter-item" style="width: 90px">
-                    <el-option v-for="item in formItem.stateList" :key="item.value" :label="item.label" :value="item.value" />
-                </el-select>
-            </el-form-item>
         </el-row>
         <el-row v-show="isAdd === false">
             <el-col :span="12">
@@ -129,10 +117,10 @@ export default {
         return {
             dialog: false,
             loading: false,
-            url_path: "warehous",
+            url_path: "warehousout",
             form: {
                 voucher_number: "",
-                customer_name: "张三",
+                customer_name: "李四",
                 mobile: "13888888888",
                 gross_weight: 1110,
                 vehicle_weight: 100,
@@ -223,7 +211,7 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "小麦"
+            this.form.customer_name = this.form.customer_name + "小麦" 
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

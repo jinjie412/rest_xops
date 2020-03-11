@@ -10,26 +10,22 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from apps.common.custom import CommonPagination, RbacPermission
-from graincentre.models import WarehousEntry
+from graincentre.models import OutStock
 from graincentre.utils.filterset import WarehouseEntryFilter
 from apps.graincentre.utils.paginates import Pagination
-from apps.graincentre.utils.serializer import (Serializer, SerializerCreat,
+from apps.graincentre.utils.serializer import (SerializerOut, SerializerCreat,
                                                SerializerPut)
 from rest_xops.basic import XopsResponse
 from rest_xops.code import *
 
 
-class Warehous(ModelViewSet):
-    queryset = WarehousEntry.objects.all()
-    serializer_class = Serializer
+class Warehousout(ModelViewSet):
+    queryset = OutStock.objects.all()
+    serializer_class = SerializerOut
     pagination_class = CommonPagination
-
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
-    # filter_fields = ('naure', 'sub_warehous')
-
-    filter_class = WarehouseEntryFilter
     search_fields = ('=voucher_number', 'customer_name', 'mobile')
-
+    filter_fields = ('sub_warehous',)
     ordering_fields = ('invoice_date',)
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (RbacPermission,)
@@ -39,7 +35,7 @@ class Warehous(ModelViewSet):
             return SerializerPut
         elif self.action == 'creat':
             return SerializerCreat
-        return Serializer
+        return SerializerOut
 
     def create(self, request, *args, **kwargs):
         rd = ''.join(random.sample(string.digits, 2))
@@ -58,15 +54,15 @@ class Warehous(ModelViewSet):
         return XopsResponse(serializer.data, status=CREATED, headers=headers)
 
     def update(self, request, *args, **kwargs):
-        put_obj = WarehousEntry.objects.get(voucher_number=kwargs['pk'])
-        serializer = self.get_serializer(data=request.data, instance=put_obj, many=False)
+        put_obj = OutStock.objects.get(voucher_number=kwargs['pk'])
+        serializer = self.get_serializer(
+            data=request.data, instance=put_obj, many=False)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data['net_weight'] = request.data['gross_weight'] - \
-            request.data['vehicle_weight'] - request.data['sub_weight']
+            request.data['vehicle_weight']
         if serializer.validated_data['net_weight'] < 0:
             return XopsResponse('净重结果是负数,输入异常')
         serializer.validated_data['amount_pay'] = Decimal(
             serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
         self.perform_update(serializer)
         return XopsResponse('ppp')
-

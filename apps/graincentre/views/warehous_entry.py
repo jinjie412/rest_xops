@@ -68,7 +68,6 @@ class WarehousEntryView(APIView):
 
     def get(self, request):
         sub_warehous = request.query_params.get('sub_warehous')
-        print(sub_warehous)
         warehous_entry = WarehousEntry.objects.filter(
             sub_warehous=sub_warehous).order_by('-invoice_date')
         paginater = Pagination()
