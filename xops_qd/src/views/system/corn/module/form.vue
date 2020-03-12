@@ -4,7 +4,7 @@
         <el-row v-show="isAdd === false">
             <el-col>
                 <el-form-item label="凭证编号" prop="voucher_number">
-                    <el-input v-model="form.voucher_number" :disabled="isAdd === false" style="width: 300px;" />
+                    <el-input v-model="form.voucher_number" readonly="isAdd === false" style="width: 300px;" />
                 </el-form-item>
             </el-col>
         </el-row>
@@ -33,32 +33,37 @@
             </el-col>
             <el-col :span="8">
                 <el-form-item label="扣量(吨)" prop="sub_weight">
-                    <el-input type="number" v-model="form.sub_weight" style="width: 150px;" />
+                    <el-input type="number" v-model.number="form.sub_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
-            <el-col :span="24">
-                <el-form-item label="收购单价" prop="unit_price">
+            <el-col :span="12">
+                <el-form-item label="净重(吨)" prop="net_weight">
+                    <el-input type="float" v-model="form.net_weight" style="width: 300px;" />
+                </el-form-item>
+            </el-col>
+            <el-col :span="12">
+                <el-form-item label="单价(元)" prop="unit_price">
                     <el-input type="float" v-model="form.unit_price" style="width: 300px;" />
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row v-show="isAdd === false">
             <el-col :span="12">
-                <el-form-item label="应付款" prop="amount_pay">
-                    <el-input type="float" v-model="form.amount_pay" :disabled="isAdd === false" style="width: 300px;" />
+                <el-form-item label="应付款(元)" prop="amount_pay">
+                    <el-input type="float" v-model="form.amount_pay" readonly="isAdd === false" style="width: 300px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="12">
-                <el-form-item label="已付款" prop="actual_pay">
+                <el-form-item label="已付款(元)" prop="actual_pay">
                     <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
             <el-form-item label="性质" prop="naure">
-                <el-select v-model="form.naure" clearable class="filter-item" style="width: 90px">
+                <el-select v-model="form.naure" clearable class="filter-item" style="width: 300px">
                     <el-option v-for="item in formItem.stateList" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
             </el-form-item>
@@ -66,12 +71,12 @@
         <el-row v-show="isAdd === false">
             <el-col :span="12">
                 <el-form-item label="创建时间" prop="invoice_date">
-                    <el-input v-model="form.invoice_date" :disabled="isAdd === false" style="width: 200px;" />
+                    <el-input v-model="form.invoice_date" readonly="isAdd === false" style="width: 200px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="12">
                 <el-form-item label="更新时间" prop="update_time">
-                    <el-input v-model="form.update_time" :disabled="isAdd === false" style="width: 200px;" />
+                    <el-input v-model="form.update_time" readonly="isAdd === false" style="width: 200px;" />
                 </el-form-item>
             </el-col>
         </el-row>     
@@ -141,7 +146,7 @@ export default {
                 unit_price: 1,
                 amount_pay: 0,
                 actual_pay: 0,
-                naure: 1,
+                naure: 0,
                 sub_warehous: 0
             },
             rules: {
@@ -223,7 +228,7 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "玉米"
+            this.form.customer_name = this.form.customer_name + "{玉米}"
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

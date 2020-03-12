@@ -5,29 +5,30 @@
     <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
         <el-table-column label="详情" width="50px">
             <el-table-column prop="voucher_number" label="凭证编号" width="116px" />
-            <el-table-column prop="customer_name" label="客户名" width="80px" />
+            <el-table-column prop="customer_name" label="客户名" width="100px" />
             <el-table-column prop="mobile" label="手机" width="96px" />
             <el-table-column prop="gross_weight" label="毛重(吨)" width="70px" />
             <el-table-column prop="vehicle_weight" label="皮重(吨)" width="70px" />
             <el-table-column prop="sub_weight" label="扣量(吨)" width="70px" />
             <el-table-column prop="net_weight" label="净重(吨)" width="70px" />
             <el-table-column prop="unit_price" label="单价" width="50px" />
-            <el-table-column prop="amount_pay" label="应付款" width="97px" />
-            <el-table-column prop="actual_pay" label="已付款" width="97px" />
-            <el-table-column prop="naure_name" label="性质" width="60px" />
-            <el-table-column prop="invoice_date" label="创建时间" width="140px" />
-            <el-table-column prop="update_time" label="更新时间" width="140px" />
+            <el-table-column prop="amount_pay" label="应付款" width="96px" />
+            <el-table-column prop="actual_pay" label="已付款" width="96px" />
+            <el-table-column prop="naure_name" label="性质" width="46px" />
+            <el-table-column prop="invoice_date" label="创建时间" width="136px" />
+            <el-table-column prop="update_time" label="更新时间" width="136px" />
         </el-table-column>
-        <el-table-column label="操作" width="200px" align="center">
+        <el-table-column label="操作" width="205px" align="center">
             <template slot-scope="scope">
-                <edit v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :organizations="organizations" :sup_this="sup_this" />
+                <edit v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :organizations="organizations" :sup_this="sup_this" width="66" />
+                <prin v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :sup_this="sup_this" />
                 <el-popover v-if="checkPermission(['admin','user_all','user_delete'])" :ref="scope.row.voucher_number" placement="top" width="180">
                     <p>确定删除本条数据吗？所有关联的数据将会被清除</p>
                     <div style="text-align: right; margin: 0">
                         <el-button size="mini" type="text" @click="$refs[scope.row.voucher_number].doClose()">取消</el-button>
                         <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.voucher_number)">确定</el-button>
                     </div>
-                    <el-button slot="reference" type="danger" size="mini">删除</el-button>
+                    <el-button slot="reference" type="danger" size="mini" width="6">删除</el-button>
                 </el-popover>
             </template>
         </el-table-column>
@@ -48,10 +49,12 @@ import {
 } from '@/utils/index'
 import eHeader from './module/header'
 import edit from './module/edit'
+import prin from './module/prinw'
 export default {
     components: {
         eHeader,
         edit,
+        prin,
     },
     mixins: [initData],
     data() {

@@ -14,6 +14,8 @@ import store from './store'
 import '@/icons' // icon
 import './permission' // permission control
 
+import Print from '@/utils/print'
+Vue.use(Print) // 注册
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
