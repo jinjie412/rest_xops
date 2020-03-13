@@ -8,7 +8,7 @@
     <el-select v-model="query.pay" clearable placeholder="款项" class="filter-item" style="width: 90px">
         <el-option v-for="item in stateList" :key="item.key" :label="item.display_name" :value="item.key" />
     </el-select>
-    <el-date-picker v-model="query.rangedate" size='mini' value-format="yyyy-MM-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+    <el-date-picker v-model="query.rangedate" size='small' value-format="yyyy-mm-dd" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
     </el-date-picker>
     <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="toQuery">搜索</el-button>
     <!-- 新增 -->
