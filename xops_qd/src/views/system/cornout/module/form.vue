@@ -46,9 +46,14 @@
                 </el-form-item>
             </el-col>
             <el-col :span="12">
-                <el-form-item label="已付款" prop="actual_pay">
-                    <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
+                <el-form-item label="款项" prop="pay">
+                    <el-select v-model="form.pay" clearable class="filter-item" style="width: 300px">
+                        <el-option v-for="item in payItem.stateList" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-select>
                 </el-form-item>
+                <!-- <el-form-item label="已付款" prop="actual_pay">
+                <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
+            </el-form-item> -->
             </el-col>
         </el-row>
         <el-row v-show="isAdd === false">
@@ -62,7 +67,7 @@
                     <el-input v-model="form.update_time" :disabled="isAdd === false" style="width: 200px;" />
                 </el-form-item>
             </el-col>
-        </el-row>     
+        </el-row>
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button type="text" @click="cancel">取消</el-button>
@@ -175,10 +180,9 @@ export default {
                     required: true,
                     validator: checkNaure
                 }],
-                actual_pay:[{
+                actual_pay: [{
                     validator: checkUnit_price,
-                }
-                ]
+                }]
             },
             formItem: {
                 stateList: [{
@@ -188,6 +192,18 @@ export default {
                     {
                         value: 1,
                         label: '代存'
+                    }
+                ]
+
+            },
+            payItem: {
+                stateList: [{
+                        value: 0,
+                        label: '欠账'
+                    },
+                    {
+                        value: 1,
+                        label: '付款'
                     }
                 ]
 
@@ -211,7 +227,7 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "玉米" 
+            this.form.customer_name = this.form.customer_name + "{玉米}"
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

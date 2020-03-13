@@ -56,10 +56,17 @@
                 </el-form-item>
             </el-col>
             <el-col :span="12">
+                <el-form-item label="款项" prop="pay">
+                    <el-select v-model="form.pay" clearable class="filter-item" style="width: 300px">
+                        <el-option v-for="item in payItem.stateList" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-select>
+                </el-form-item>
+            </el-col>
+            <!-- <el-col :span="12">
                 <el-form-item label="已付款(元)" prop="actual_pay">
                     <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
                 </el-form-item>
-            </el-col>
+            </el-col> -->
         </el-row>
         <el-row>
             <el-form-item label="性质" prop="naure">
@@ -79,7 +86,7 @@
                     <el-input v-model="form.update_time" readonly="isAdd === false" style="width: 200px;" />
                 </el-form-item>
             </el-col>
-        </el-row>     
+        </el-row>
     </el-form>
     <div slot="footer" class="dialog-footer">
         <el-button type="text" @click="cancel">取消</el-button>
@@ -147,7 +154,8 @@ export default {
                 amount_pay: 0,
                 actual_pay: 0,
                 naure: 0,
-                sub_warehous: 0
+                sub_warehous: 0,
+                pay: 0
             },
             rules: {
                 customer_name: [{
@@ -192,10 +200,9 @@ export default {
                     required: true,
                     validator: checkNaure
                 }],
-                actual_pay:[{
+                actual_pay: [{
                     validator: checkUnit_price,
-                }
-                ]
+                }]
             },
             formItem: {
                 stateList: [{
@@ -205,6 +212,18 @@ export default {
                     {
                         value: 1,
                         label: '代存'
+                    }
+                ]
+
+            },
+            payItem: {
+                stateList: [{
+                        value: 0,
+                        label: '欠账'
+                    },
+                    {
+                        value: 1,
+                        label: '付款'
                     }
                 ]
 

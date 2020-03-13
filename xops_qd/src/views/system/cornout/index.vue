@@ -12,7 +12,8 @@
             <el-table-column prop="net_weight" label="净重(吨)" width="80px" />
             <el-table-column prop="unit_price" label="收购单价" width="90px" />
             <el-table-column prop="amount_pay" label="应付款" width="120px" />
-            <el-table-column prop="actual_pay" label="已付款" width="120px" />
+            <el-table-column prop="pay_name" label="款项" width="120px" />
+            <!-- <el-table-column prop="actual_pay" label="已付款" width="120px" /> -->
             <el-table-column prop="invoice_date" label="创建时间" width="140px" />
             <el-table-column prop="update_time" label="更新时间" width="140px" />
         </el-table-column>
@@ -73,6 +74,7 @@ export default {
             const value = query.voucher_number
             const naure = query.naure
             const rangedate = query.rangedate
+            const pay = query.pay
             this.params = {
                 page: this.page,
                 size: this.size,
@@ -88,6 +90,9 @@ export default {
             }
             if (value) {
                 this.params['search'] = value
+            }
+            if(pay !== "" && pay !== null){
+                this.params['pay'] = pay
             }
             return true
         },

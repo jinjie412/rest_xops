@@ -40,6 +40,7 @@ export default {
           amount_pay: this.data.amount_pay,
           actual_pay: this.data.actual_pay,
           naure: this.data.naure,
+          pay: this.data.pay,
           invoice_date: this.data.invoice_date,
           update_time: this.data.update_time
         }

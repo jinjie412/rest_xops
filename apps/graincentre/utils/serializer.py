@@ -13,6 +13,8 @@ class Serializer(serializers.ModelSerializer):
         read_only=True, source='get_sub_warehous_display')
     naure_name = serializers.CharField(
         read_only=True, source='get_naure_display')
+    pay_name = serializers.CharField(
+        read_only=True, source='get_pay_display')
     invoice_date = serializers.DateTimeField(
         format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     update_time = serializers.DateTimeField(
@@ -34,7 +36,7 @@ class SerializerPut(serializers.ModelSerializer):
         model = WarehousEntry
         fields = ('customer_name', 'mobile', 'gross_weight', 'vehicle_weight',
                   'sub_weight', 'net_weight', 'unit_price', 'amount_pay',
-                  'actual_pay', 'customer_get_name', 'naure')
+                  'pay', 'customer_get_name', 'naure')
 
 
 class SerializerPutW(serializers.ModelSerializer):
@@ -42,7 +44,7 @@ class SerializerPutW(serializers.ModelSerializer):
         model = WarehousEntry
         fields = ('customer_name', 'mobile', 'gross_weight', 'vehicle_weight',
                   'sub_weight', 'unit_price',
-                  'actual_pay', 'customer_get_name', 'naure')
+                  'pay', 'customer_get_name', 'naure')
 
 
 class SerializerOut(serializers.ModelSerializer):
@@ -50,6 +52,8 @@ class SerializerOut(serializers.ModelSerializer):
         model = OutStock
         fields = "__all__"
 
+    pay_name = serializers.CharField(
+        read_only=True, source='get_pay_display')
     sub_warehous_name = serializers.CharField(
         read_only=True, source='get_sub_warehous_display')
     invoice_date = serializers.DateTimeField(

@@ -56,10 +56,17 @@
                 </el-form-item>
             </el-col>
             <el-col :span="12">
+                <el-form-item label="款项" prop="pay">
+                    <el-select v-model="form.pay" clearable class="filter-item" style="width: 300px">
+                        <el-option v-for="item in payItem.stateList" :key="item.value" :label="item.label" :value="item.value" />
+                    </el-select>
+                </el-form-item>
+            </el-col>
+            <!-- <el-col :span="12">
                 <el-form-item label="已付款(元)" prop="actual_pay">
                     <el-input type="float" v-model="form.actual_pay" style="width: 300px;" />
                 </el-form-item>
-            </el-col>
+            </el-col> -->
         </el-row>
         <el-row>
             <el-form-item label="性质" prop="naure">
@@ -147,7 +154,8 @@ export default {
                 amount_pay: 0,
                 actual_pay: 0,
                 naure: 0,
-                sub_warehous: 1
+                sub_warehous: 1,
+                pay: 0
             },
             rules: {
                 customer_name: [{
@@ -205,6 +213,18 @@ export default {
                     {
                         value: 1,
                         label: '代存'
+                    }
+                ]
+
+            },
+            payItem: {
+                stateList: [{
+                        value: 0,
+                        label: '欠账'
+                    },
+                    {
+                        value: 1,
+                        label: '付款'
                     }
                 ]
 

@@ -25,7 +25,7 @@ class Warehousout(ModelViewSet):
     pagination_class = CommonPagination
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     search_fields = ('=voucher_number', 'customer_name', 'mobile')
-    filter_fields = ('sub_warehous',)
+    filter_fields = ('sub_warehous', 'pay')
     ordering_fields = ('invoice_date',)
     authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (RbacPermission,)

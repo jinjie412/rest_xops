@@ -21,22 +21,44 @@
     }
 ]
 
+filters, OrderedDict(
+[
+    ('sub_warehous',<django_filters.filters.CharFilter object at 0x112d33940>), 
+    ('naure', <django_filters.filters.NumberFilter object at 0x112d338d0>), 
+    ('pay', <django_filters.filters.NumberFilter object at 0x112d33908>), 
+    ('min_net_weight', <django_filters.filters.NumberFilter object at 0x112d33710>), 
+    ('max_net_weight', <django_filters.filters.NumberFilter object at 0x112d33748>), 
+    ('min_cdate', <django_filters.filters.DateFilter object at 0x112d337f0>), 
+    ('max_cdate', <django_filters.filters.DateFilter object at 0x112d33828>), 
+    ('min_udate', <django_filters.filters.DateFilter object at 0x112d33860>), 
+    ('max_udate', <django_filters.filters.DateFilter object at 0x112d33898>)])
+System check identified no issues (0 silenced).
+March 13, 2020 - 11:11:42
+Django version 2.1.7, using settings 'rest_xops.settings'
+Starting ASGI/Channels version 2.1.7 development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
 
-
-{
-    "voucher_number": "20200310005004",
-    "customer_name": "张三",
-    "mobile": "13122223333",
-    "gross_weight": 10053,
-    "vehicle_weight": 50,
-    "sub_weight": 3,
-    "net_weight": 10000,
-    "unit_price": 1,
-    "amount_pay": "0.0000",
-    "actual_pay": 111,
-    "naure": 1,
-    "invoice_date": "2020-03-10 00:50:59",
-    "update_time": "2020-03-10 00:50:59"
-}
-
-
+django_filters.rest_framework.backends 
+/Applications/miniconda3/envs/xops/lib/python3.6/site-packages/django_filters/rest_framework/backends.py 
+DjangoFilterBackend.get_filterset.kwargs:  
+{'data': 
+    <QueryDict: 
+    {
+        'page': ['1'],
+        'size': ['10'], 
+        'ordering': ['-invoice_date'], 
+        'sub_warehous': ['0'], 
+        'min_cdate': ['2020-00-05'], 
+        'max_cdate': ['2020-00-04']}>, 
+        'queryset': 
+        <QuerySet [
+            <WarehousEntry: WarehousEntry object (20200313082485)>, 
+            <WarehousEntry: WarehousEntry object (20200313083924)>, 
+            <WarehousEntry: WarehousEntry object (20200313084454)>]>, 
+            'request': <rest_framework.request.Request object at 0x113126668>}
+==========
+WarehouseEntryFilter
+fields: OrderedDict([('sub_warehous', <django.forms.fields.CharField object at 0x113140f28>), ('naure', <django.forms.fields.DecimalField object at 0x113140fd0>), ('pay', <django.forms.fields.DecimalField object at 0x1131710b8>), ('min_net_weight', <django.forms.fields.DecimalField object at 0x113171160>), ('max_net_weight', <django.forms.fields.DecimalField object at 0x113171208>), ('min_cdate', <django.forms.fields.DateField object at 0x1131712b0>), ('max_cdate', <django.forms.fields.DateField object at 0x113171320>), ('min_udate', <django.forms.fields.DateField object at 0x113171390>), ('max_udate', <django.forms.fields.DateField object at 0x113171400>)])
+==========
+form <class 'django.forms.forms.Form'>
+==========

@@ -211,7 +211,7 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "小麦" 
+            this.form.customer_name = this.form.customer_name + "{小麦}" 
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

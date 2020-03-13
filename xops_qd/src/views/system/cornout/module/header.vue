@@ -4,8 +4,10 @@
     <el-input v-model="query.voucher_number" clearable placeholder="输入关键字搜索" style="width: 200px;" class="filter-item" @keyup.enter.native="toQuery" />
     <el-date-picker v-model="query.rangedate" size="small" value-format="yyyy-mm-dd" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
     </el-date-picker>
+    <el-select v-model="query.pay" clearable placeholder="款项" class="filter-item" style="width: 90px" @change="toQuery">
+        <el-option v-for="item in stateList" :key="item.key" :label="item.display_name" :value="item.key" />
+    </el-select><!-- 新增 -->
     <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="toQuery">搜索</el-button>
-    <!-- 新增 -->
     <div style="display: inline-block;margin: 0px 2px;">
         <el-button v-if="checkPermission(['admin','user_all','user_create'])" class="filter-item" size="mini" type="primary" icon="el-icon-plus" @click="$refs.form.dialog = true; getOrgUserTree()">新增</el-button>
         <eForm ref="form" :roles="roles" :organizations="organizations" :orgusers="orgusers" :is-add="true" />
@@ -52,7 +54,16 @@ export default {
                     key: 1,
                     display_name: '代存'
                 }
-            ]
+            ],
+            stateList: [{
+                    key: 0,
+                    display_name: '欠账'
+                },
+                {
+                    key: 1,
+                    display_name: '付款'
+                }
+            ],
         }
     },
     methods: {

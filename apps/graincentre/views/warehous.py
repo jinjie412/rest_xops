@@ -25,9 +25,9 @@ class Warehous(ModelViewSet):
     pagination_class = CommonPagination
 
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
-    # filter_fields = ('naure', 'sub_warehous')
+    # filterset_fields = ('naure', 'sub_warehous')
 
-    filter_class = WarehouseEntryFilter
+    filterset_class = WarehouseEntryFilter
     search_fields = ('=voucher_number', 'customer_name', 'mobile')
 
     ordering_fields = ('invoice_date',)

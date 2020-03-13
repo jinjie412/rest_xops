@@ -13,9 +13,10 @@ class WarehouseEntryFilter(FilterSet):
     max_udate = DateFilter(field_name='update_time', lookup_expr='lte')
 
     naure = NumberFilter(field_name='naure')
+    pay = NumberFilter(field_name='pay')
     sub_warehous = CharFilter(field_name='sub_warehous')
 
     class Meta:
         model = WarehousEntry
-        fields = ['sub_warehous', 'naure', 'min_net_weight', 'max_net_weight',
+        fields = ['sub_warehous', 'naure', 'pay', 'min_net_weight', 'max_net_weight',
                   'min_cdate', 'max_cdate', 'min_udate', 'max_udate']
