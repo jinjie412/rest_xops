@@ -6,6 +6,7 @@ import user from './modules/user'
 import tagsView from './modules/tagsView'
 import permission from './modules/permission'
 import getters from './getters'
+import grain from './modules/grain'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     api,
     user,
     tagsView,
-    permission
+    permission,
+    grain
   },
   getters
 })

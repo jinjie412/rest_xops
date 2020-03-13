@@ -227,7 +227,8 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "{玉米}"
+            this.form.sub_warehous = this.$store.state.grain.grain_type.sub_warehous
+            this.form.customer_name = this.form.customer_name + this.$store.state.grain.grain_type.grain
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

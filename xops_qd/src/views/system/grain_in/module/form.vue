@@ -230,6 +230,10 @@ export default {
             },
         };
     },
+    created() {
+        // this.getOrganizations()
+        
+    },
     methods: {
         cancel() {
             this.resetForm();
@@ -247,14 +251,15 @@ export default {
             });
         },
         doAdd() {
-            this.form.customer_name = this.form.customer_name + "{玉米}"
+            this.form.sub_warehous = this.$store.state.grain.grain_type.sub_warehous
+            this.form.customer_name = this.form.customer_name + this.$store.state.grain.grain_type.grain
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();
                     this.$message({
                         showClose: true,
                         type: "success",
-                        message: "添加成功!默认密码123456!",
+                        message: "添加成功!",
                         duration: 2500
                     });
                     this.loading = false;

@@ -12,6 +12,7 @@ const getters = {
   roles: state => state.user.roles,
   permission_routers: state => state.permission.routers,
   addRouters: state => state.permission.addRouters,
-  socketApi: state => state.api.socketApi
+  socketApi: state => state.api.socketApi,
+  grain_type: state => state.grain.grain_type
 }
 export default getters
