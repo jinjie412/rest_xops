@@ -5,19 +5,19 @@
     <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
         <el-table-column label="详情" width="50px">
             <el-table-column prop="voucher_number" label="凭证编号" width="120px" />
-            <el-table-column prop="customer_name" label="客户名" width="85px" />
-            <el-table-column prop="mobile" label="手机" width="102px" />
+            <el-table-column prop="customer_name" label="客户名" width="90px" />
+            <el-table-column prop="mobile" label="手机" width="107px" />
             <el-table-column prop="gross_weight" label="毛重(吨)" width="80px" />
             <el-table-column prop="vehicle_weight" label="皮重(吨)" width="80px" />
             <el-table-column prop="net_weight" label="净重(吨)" width="80px" />
-            <el-table-column prop="unit_price" label="收购单价" width="90px" />
-            <el-table-column prop="amount_pay" label="应付款" width="120px" />
-            <el-table-column prop="pay_name" label="款项" width="120px" />
-            <!-- <el-table-column prop="actual_pay" label="已付款" width="120px" /> -->
+            <el-table-column prop="unit_price" label="单价" width="80px" />
+            <el-table-column prop="amount_pay" label="应付款" width="100px" />
+            <el-table-column prop="pay_name" label="款项" width="80px" />
+            <el-table-column prop="actual_pay" label="已付款" width="100px" />
             <el-table-column prop="invoice_date" label="创建时间" width="140px" />
             <el-table-column prop="update_time" label="更新时间" width="140px" />
         </el-table-column>
-        <el-table-column label="操作" width="200px" align="center">
+        <el-table-column label="操作" width="160px" align="center">
             <template slot-scope="scope">
                 <edit v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :organizations="organizations" :sup_this="sup_this" />
                 <el-popover v-if="checkPermission(['admin','user_all','user_delete'])" :ref="scope.row.voucher_number" placement="top" width="180">
@@ -32,7 +32,7 @@
         </el-table-column>
     </el-table>
     <!--分页组件-->
-    <el-pagination :total="total" style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
+    <el-pagination :total="total" :page-sizes='[50,100,500,1000,3000]' style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
 </div>
 </template>
 

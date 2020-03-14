@@ -40,7 +40,7 @@
         <el-row>
             <el-col :span="12">
                 <el-form-item label="净重(吨)" prop="net_weight">
-                    <el-input type="float" v-model="form.net_weight" style="width: 300px;" />
+                    <el-input type="float" v-model="form.net_weight" readonly=true style="width: 300px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -277,8 +277,8 @@ export default {
                     this.$message({
                         showClose: true,
                         type: "success",
-                        message: "修改成功!",
-                        duration: 2500
+                        message: res.message,
+                        duration: 5000
                     });
                     this.loading = false;
                     this.sup_this.init();

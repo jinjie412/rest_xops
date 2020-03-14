@@ -10,7 +10,7 @@ try:
 
     # 向STUDENT表插入数据的SQL语句
     SQL = '''
-          INSERT INTO `rbac_menu` (id, name, icon, path, is_frame, is_show, sort, component, pid_id) VALUES (31,"玉米出库", "system", "cornout", false, true, 101, "system/cornout/index", 1);
+          INSERT INTO `rbac_menu` (id, name, icon, path, is_frame, is_show, sort, component, pid_id) VALUES (33,"出库统计", "system", "grainout", false, true, 101, "system/grainout/index", 1);
           '''
     # 插入数据
     cursor.execute(SQL)

@@ -49,6 +49,7 @@ class Warehousout(ModelViewSet):
             return XopsResponse('净重结果是负数,输入异常')
         serializer.validated_data['amount_pay'] = Decimal(
             serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+        
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return XopsResponse(serializer.data, status=CREATED, headers=headers)
@@ -64,5 +65,9 @@ class Warehousout(ModelViewSet):
             return XopsResponse('净重结果是负数,输入异常')
         serializer.validated_data['amount_pay'] = Decimal(
             serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+        
+        if 1 == serializer.validated_data['pay']:
+            serializer.validated_data['actual_pay'] = serializer.validated_data['amount_pay']
+
         self.perform_update(serializer)
         return XopsResponse('ppp')

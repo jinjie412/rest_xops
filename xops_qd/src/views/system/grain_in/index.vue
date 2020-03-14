@@ -6,18 +6,18 @@
         <el-table-column label="详情" width="50px">
             <el-table-column prop="voucher_number" label="凭证编号" width="116px" />
             <el-table-column prop="customer_name" label="客户名" width="100px" />
-            <el-table-column prop="mobile" label="手机" width="96px" />
-            <el-table-column prop="gross_weight" label="毛重(吨)" width="70px" />
-            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="70px" />
-            <el-table-column prop="sub_weight" label="扣量(吨)" width="70px" />
-            <el-table-column prop="net_weight" label="净重(吨)" width="70px" />
+            <el-table-column prop="mobile" label="手机" width="95px" />
+            <el-table-column prop="gross_weight" label="毛重(吨)" width="64px" />
+            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="64px" />
+            <el-table-column prop="sub_weight" label="扣量(吨)" width="64px" />
+            <el-table-column prop="net_weight" label="净重(吨)" width="64px" />
             <el-table-column prop="unit_price" label="单价" width="50px" />
-            <el-table-column prop="amount_pay" label="应付款" width="96px" />
-            <el-table-column prop="pay_name" label="款项" width="96px" />
-            <!-- <el-table-column prop="actual_pay" label="已付款" width="96px" /> -->
+            <el-table-column prop="amount_pay" label="应付款" width="85px" />
+            <el-table-column prop="pay_name" label="款项" width="50px" />
+            <el-table-column prop="actual_pay" label="已付款" width="85px" />
             <el-table-column prop="naure_name" label="性质" width="46px" />
-            <el-table-column prop="invoice_date" label="创建时间" width="136px" />
-            <el-table-column prop="update_time" label="更新时间" width="136px" />
+            <el-table-column prop="invoice_date" label="创建时间" width="134px" />
+            <el-table-column prop="update_time" label="更新时间" width="134px" />
         </el-table-column>
         <el-table-column label="操作" width="205px" align="center">
             <template slot-scope="scope">
@@ -35,7 +35,7 @@
         </el-table-column>
     </el-table>
     <!--分页组件-->
-    <el-pagination :total="total" style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
+    <el-pagination :total="total" :page-sizes='[50,100,500,1000,3000]' style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
 </div>
 </template>
 
@@ -119,7 +119,6 @@ export default {
             if (pay !== "" && pay !== null) {
                 this.params['pay'] = pay
             }
-
             return true
         },
         subDelete(voucher_number) {

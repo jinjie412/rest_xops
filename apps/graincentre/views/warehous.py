@@ -51,13 +51,22 @@ class Warehous(ModelViewSet):
             request.data['vehicle_weight'] - request.data['sub_weight']
         if serializer.validated_data['net_weight'] < 0:
             return XopsResponse('净重结果是负数,输入异常')
-        serializer.validated_data['amount_pay'] = Decimal(
-            serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+        
+        if serializer.validated_data['naure'] == 1:#代存
+            serializer.validated_data['amount_pay'] = 0
+            serializer.validated_data['unit_price'] = 0
+        elif serializer.validated_data['naure'] == 0:
+            serializer.validated_data['amount_pay'] = Decimal(
+                serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+        else:
+            return XopsResponse('naure error')
+        
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return XopsResponse(serializer.data, status=CREATED, headers=headers)
 
     def update(self, request, *args, **kwargs):
+        msg = '修改成功'
         put_obj = WarehousEntry.objects.get(voucher_number=kwargs['pk'])
         serializer = self.get_serializer(data=request.data, instance=put_obj, many=False)
         serializer.is_valid(raise_exception=True)
@@ -65,8 +74,36 @@ class Warehous(ModelViewSet):
             request.data['vehicle_weight'] - request.data['sub_weight']
         if serializer.validated_data['net_weight'] < 0:
             return XopsResponse('净重结果是负数,输入异常')
-        serializer.validated_data['amount_pay'] = Decimal(
-            serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+        
+        if serializer.validated_data['net_weight'] < 0:
+            return XopsResponse('净重结果是负数,输入异常')
+        
+        if serializer.validated_data['naure'] == 1: #代存
+            serializer.validated_data['amount_pay'] = 0
+            serializer.validated_data['unit_price'] = 0
+        elif serializer.validated_data['naure'] == 0:#收购
+            serializer.validated_data['amount_pay'] = Decimal(
+                serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])
+
+        else:
+            msg = 'naure error'
+            return XopsResponse(msg=msg)
+
+        if 1 == serializer.validated_data['pay'] and 0 == serializer.validated_data['naure']:
+            if serializer.validated_data['unit_price'] == 0:
+                msg = "代存订单需要设定收购单间,才能付款"
+                serializer.validated_data['actual_pay'] = 0
+                serializer.validated_data['pay'] = 0
+            else:
+                serializer.validated_data['actual_pay'] = serializer.validated_data['amount_pay']
+                msg = "付款成功"
+        elif 1 == serializer.validated_data['pay'] and 1 == serializer.validated_data['naure']:
+            serializer.validated_data['pay'] = 0
+            msg = "代存订单不能结账付款,修改为收购,设定单价在付款"
+        else:
+            serializer.validated_data['actual_pay'] = 0
+            msg = "设定欠账,已付款清零"
+
         self.perform_update(serializer)
-        return XopsResponse('ppp')
+        return XopsResponse(serializer.data, msg=msg)
 
