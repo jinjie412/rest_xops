@@ -27,8 +27,8 @@ class WarehousEntryDetail(ReadOnlyModelViewSet):
     pagination_class = CommonPagination
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filterset_class = WarehouseDetailEntryFilter
-    # authentication_classes = (JSONWebTokenAuthentication,)
-    # permission_classes = (RbacPermission,)
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (RbacPermission,)
     def get_serializer_class(self):
         if self.action == 'unit_price':
             return SerializerEntryDetailResponse
@@ -78,8 +78,8 @@ class WarehousEntryDetailOut(ReadOnlyModelViewSet):
     pagination_class = CommonPagination
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     filterset_class = WarehouseDetailOutFilter
-    # authentication_classes = (JSONWebTokenAuthentication,)
-    # permission_classes = (RbacPermission,)
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (RbacPermission,)
     def get_serializer_class(self):
         if self.action == 'unit_price':
             return SerializerEntryDetailResponseOut

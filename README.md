@@ -342,56 +342,56 @@ npm run build
 **6、配置NGINX
 
 ```
-upstream xops {
-   server 127.0.0.1:8000;
-}
-upstream channels-backend {
-   server 127.0.0.1:8001;
-}
+    upstream xops {
+    server 192.169.2.211:8000;
+    }
+    upstream channels-backend {
+    server 192.169.2.211:8001;
+    }
 
-server {
-    listen      80;
-    server_name demo.xufqing.cn;#你的访问地址,和前端生产的地址一致
-    location / {
-        try_files $uri $uri/ /index.html;
-        root /home/xufeng/rest_xops/xops_web; # 这是前端静态文件
-    }
-    location ^~/api  {
-        proxy_pass http://xops;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-    location ^~/auth  {
-        proxy_pass http://xops;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-    location ^~/media  {
-        alias /home/xufeng/rest_xops/media;
-    }
-    location ^~/websocket/console {
-        try_files $uri @proxy_to_app;
-    }
-    #location /flower {
-    #    proxy_pass http://127.0.0.1:5555;
-    #}
-    location @proxy_to_app {
-        proxy_pass http://channels-backend;
+    server {
+        listen      8013;
+        server_name 192.168.2.211;#你的访问地址,和前端生产的地址一致
+        location / {
+            try_files $uri $uri/ /index.html;
+            root /Users/jin/rest_xops/xops_qd/dist; # 这是前端静态文件
+        }
+        location ^~/api  {
+            proxy_pass http://xops;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+        location ^~/auth  {
+            proxy_pass http://xops;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+        location ^~/media  {
+            alias /home/xufeng/rest_xops/media;
+        }
+        location ^~/websocket/console {
+            try_files $uri @proxy_to_app;
+        }
+        #location /flower {
+        #    proxy_pass http://127.0.0.1:5555;
+        #}
+        location @proxy_to_app {
+            proxy_pass http://channels-backend;
 
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
 
-        proxy_redirect off;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Host $server_name;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $server_name;
+        }
     }
-}
 ```
 最后 http://demo.xufqing.cn（你的地址）登陆访问
