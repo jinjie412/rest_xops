@@ -22,10 +22,15 @@ from apps.graincentre.views.out_stock import OutStockView
 from apps.graincentre.views.warehous import Warehous
 from apps.graincentre.views.warehous_entry import WarehousEntryView
 from apps.graincentre.views.warehousout import Warehousout
+from apps.graincentre.views.warehous_detail import WarehousEntryDetail, WarehousEntryDetailOut
 
 router = routers.SimpleRouter()
 router.register(r'warehous', Warehous, base_name='warehous')
 router.register(r'warehousout', Warehousout, base_name='warehousout')
+router.register(r'warehousentrydetail', WarehousEntryDetail,
+                base_name='warehousentrydetail')
+router.register(r'warehousoutdetail', WarehousEntryDetailOut,
+                base_name='warehousoutdetail')
 
 urlpatterns = [
     # re_path(r'login/$', LoginView.as_view()),

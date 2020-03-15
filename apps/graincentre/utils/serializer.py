@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from graincentre.models import OutStock, WarehousEntry
+from graincentre.models import OutStock, WarehousEntry, WarehousEntryResponse
 
 
 class Serializer(serializers.ModelSerializer):
@@ -30,6 +30,58 @@ class SerializerCreat(serializers.ModelSerializer):
                   'vehicle_weight', 'sub_weight',
                   'unit_price', 'naure')
 
+class SerializerEntryDetail(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntry
+        fields = ('sub_warehous', 'invoice_date')
+        extra_kwargs = {
+            'sub_warehous': {
+                'required': True,
+                'error_messages': {
+                    'required': '必填项',
+                }
+            },
+        } 
+
+class SerializerEntryDetailResponse(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = '__all__'
+
+class SerializerEntryDetailResponseNetWeight(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'customer_name', 'sum_amount_pay', 'sum_actual_pay')
+
+class SerializerEntryDetailResponseNaure(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'naure')
+    
+class SerializerEntryDetailResponsePay(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'pay')
+
+class SerializerEntryDetailResponseOut(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = '__all__'
+
+class SerializerEntryDetailResponseNetWeightOut(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'customer_name', 'sum_amount_pay', 'sum_actual_pay')
+
+class SerializerEntryDetailResponseNaureOut(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'naure')
+    
+class SerializerEntryDetailResponsePayOut(serializers.ModelSerializer):
+    class Meta:
+        model = WarehousEntryResponse
+        fields = ('sum_net', 'pay')
 
 class SerializerPut(serializers.ModelSerializer):
     class Meta:
@@ -60,3 +112,5 @@ class SerializerOut(serializers.ModelSerializer):
         format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     update_time = serializers.DateTimeField(
         format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
+
+

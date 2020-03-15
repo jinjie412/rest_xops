@@ -24,3 +24,12 @@ export function del(voucher_number, url) {
     method: "delete"
   });
 }
+
+//入库详情
+export function detail(data, url) {
+  return request({
+    url: "api/" + url + "/",
+    method: get,
+    data: data,
+  })
+}

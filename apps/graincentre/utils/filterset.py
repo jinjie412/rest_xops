@@ -1,5 +1,5 @@
 from django_filters import FilterSet, DateFilter, NumberFilter, CharFilter
-from graincentre.models import WarehousEntry
+from graincentre.models import WarehousEntry, OutStock
 
 
 class WarehouseEntryFilter(FilterSet):
@@ -20,3 +20,26 @@ class WarehouseEntryFilter(FilterSet):
         model = WarehousEntry
         fields = ['sub_warehous', 'naure', 'pay', 'min_net_weight', 'max_net_weight',
                   'min_cdate', 'max_cdate', 'min_udate', 'max_udate']
+
+
+class WarehouseDetailEntryFilter(FilterSet):
+    min_cdate = DateFilter(field_name='invoice_date', lookup_expr='gte')
+    max_cdate = DateFilter(field_name='invoice_date', lookup_expr='lte')
+
+    min_udate = DateFilter(field_name='update_time', lookup_expr='gte')
+    max_udate = DateFilter(field_name='update_time', lookup_expr='lte')
+    class Meta:
+        model = WarehousEntry
+        fields = ['sub_warehous', 'min_cdate', 'max_cdate', 'min_udate', 'max_udate']
+
+
+
+class WarehouseDetailOutFilter(FilterSet):
+    min_cdate = DateFilter(field_name='invoice_date', lookup_expr='gte')
+    max_cdate = DateFilter(field_name='invoice_date', lookup_expr='lte')
+
+    min_udate = DateFilter(field_name='update_time', lookup_expr='gte')
+    max_udate = DateFilter(field_name='update_time', lookup_expr='lte')
+    class Meta:
+        model = OutStock
+        fields = ['sub_warehous', 'min_cdate', 'max_cdate', 'min_udate', 'max_udate']

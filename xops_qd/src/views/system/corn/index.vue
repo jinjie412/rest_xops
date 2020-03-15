@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import idex from '../grain_in/index'
+import idex from '../grain/grain_in/index'
 export default {
     components: {
         idex,

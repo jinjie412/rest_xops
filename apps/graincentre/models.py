@@ -33,6 +33,22 @@ class WarehousEntry(models.Model):
     invoice_date = models.DateTimeField('开票时间', auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True, verbose_name='最后更改')
 
+class WarehousEntryResponse(models.Model):
+    '''
+    入库明细,只做入库明细返回序列化
+    '''
+    class Meta:
+        verbose_name_plural = "入库明细"
+
+    customer_name = models.CharField(max_length=32, verbose_name='客户名')
+    sum_net = models.IntegerField(verbose_name='净重合计(吨)', default=0)
+    unit_price = models.DecimalField(max_digits=5, decimal_places=2, default=0, verbose_name='收购单价')
+    sum_amount_pay = models.DecimalField(max_digits=20, decimal_places=0, verbose_name='应付金额总计', default=0)
+    sum_actual_pay = models.DecimalField(max_digits=20, decimal_places=0, verbose_name='实付金额总计' , default=0)
+    pay_choices = ((1,'付款'), (0, '欠账'))
+    pay = models.SmallIntegerField(choices=pay_choices, verbose_name='款项', default=0)
+    naure_choices = ((0, '收购'), (1, '代存'))
+    naure = models.SmallIntegerField(choices=naure_choices, verbose_name='性质', default=0)
 class OutStock(models.Model):
     '''
     出库单

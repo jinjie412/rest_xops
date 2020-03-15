@@ -21,15 +21,15 @@
     }
 ]
 
-we.objects.filter(sub_warehous=1).values("customer_name").annotate(sum_net=Sum('net_weight'), sum_amout_pay=Sum('amount_pay'), sum_actual_pay=Sum('actual_pay')).values('customer_name', 'sum_net', 'unit_price', 'sum_amout_pay', 'sum_actual_pay')
+we.objects.filter(sub_warehous=1).values("customer_name").annotate(sum_net=Sum('net_weight'), sum_amount_pay=Sum('amount_pay'), sum_actual_pay=Sum('actual_pay')).values('customer_name', 'sum_net', 'unit_price', 'sum_amount_pay', 'sum_actual_pay')
 
-{'customer_name': '刘明{小麦}', 'unit_price': Decimal('1.20'), 'sum_net': 1000, 'sum_amout_pay': Decimal('1200'), 'sum_actual_pay': Decimal('0')}
-{'customer_name': '刘明{小麦}', 'unit_price': Decimal('1.30'), 'sum_net': 1000, 'sum_amout_pay': Decimal('1300'), 'sum_actual_pay': Decimal('0')}
-{'customer_name': '张三{小麦}', 'unit_price': Decimal('0.00'), 'sum_net': 2112, 'sum_amout_pay': Decimal('0'), 'sum_actual_pay': Decimal('0')}
-{'customer_name': '张三{小麦}', 'unit_price': Decimal('1.00'), 'sum_net': 1000, 'sum_amout_pay': Decimal('1000'), 'sum_actual_pay': Decimal('1000')}
-{'customer_name': '李四{小麦}', 'unit_price': Decimal('1.00'), 'sum_net': 3000, 'sum_amout_pay': Decimal('3000'), 'sum_actual_pay': Decimal('3000')}
-{'customer_name': '李四{小麦}', 'unit_price': Decimal('1.04'), 'sum_net': 1000, 'sum_amout_pay': Decimal('1040'), 'sum_actual_pay': Decimal('0')}
-{'customer_name': '王五{小麦}', 'unit_price': Decimal('1.20'), 'sum_net': 1000, 'sum_amout_pay': Decimal('1200'), 'sum_actual_pay': Decimal('1200')}
+{'customer_name': '刘明{小麦}', 'unit_price': Decimal('1.20'), 'sum_net': 1000, 'sum_amount_pay': Decimal('1200'), 'sum_actual_pay': Decimal('0')}
+{'customer_name': '刘明{小麦}', 'unit_price': Decimal('1.30'), 'sum_net': 1000, 'sum_amount_pay': Decimal('1300'), 'sum_actual_pay': Decimal('0')}
+{'customer_name': '张三{小麦}', 'unit_price': Decimal('0.00'), 'sum_net': 2112, 'sum_amount_pay': Decimal('0'), 'sum_actual_pay': Decimal('0')}
+{'customer_name': '张三{小麦}', 'unit_price': Decimal('1.00'), 'sum_net': 1000, 'sum_amount_pay': Decimal('1000'), 'sum_actual_pay': Decimal('1000')}
+{'customer_name': '李四{小麦}', 'unit_price': Decimal('1.00'), 'sum_net': 3000, 'sum_amount_pay': Decimal('3000'), 'sum_actual_pay': Decimal('3000')}
+{'customer_name': '李四{小麦}', 'unit_price': Decimal('1.04'), 'sum_net': 1000, 'sum_amount_pay': Decimal('1040'), 'sum_actual_pay': Decimal('0')}
+{'customer_name': '王五{小麦}', 'unit_price': Decimal('1.20'), 'sum_net': 1000, 'sum_amount_pay': Decimal('1200'), 'sum_actual_pay': Decimal('1200')}
 
 
 
