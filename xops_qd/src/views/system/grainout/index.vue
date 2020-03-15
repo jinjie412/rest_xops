@@ -29,7 +29,8 @@
             </el-tab-pane>
         </el-tabs>
     </div>
-</div>
+    <!--分页组件-->
+    <el-pagination :total="total" :page-sizes='[10,50,100,500,1000,3000]' style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" /></div>
 </template>
 
 <script>

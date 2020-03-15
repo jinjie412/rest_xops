@@ -35,7 +35,7 @@
         </el-table-column>
     </el-table>
     <!--分页组件-->
-    <el-pagination :total="total" :page-sizes='[50,100,500,1000,3000]' style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
+    <el-pagination :total="total" :page-sizes='[10,50,100,500,1000,3000]' style="margin-top: 8px;" layout="total, prev, pager, next, sizes" @size-change="sizeChange" @current-change="pageChange" />
 </div>
 </template>
 

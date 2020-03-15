@@ -10,10 +10,11 @@ try:
 
     # 向STUDENT表插入数据的SQL语句
     # SQL = '''
-    #       INSERT INTO `rbac_menu` (id, name, icon, path, is_frame, is_show, sort, component, pid_id) VALUES (33,"出库统计", "system", "grainout", false, true, 101, "system/grainout/index", 1);
+    #       INSERT INTO `rbac_menu` (id, name, icon, path, is_frame, is_show, sort, component, pid_id) VALUES (1,"系统管理", "system", "system", false, true, 0, 0, 0);
     #       '''
+    
     SQL = '''
-          UPDATE rbac_menu SET name = '玉米入库' WHERE id = 29
+          UPDATE rbac_menu SET is_show = 0 WHERE id = 4
           '''
     
     # 插入数据
