@@ -2,7 +2,7 @@
 <div class="app-container">
     <eHeader :query="query"/>
     <!--表格渲染-->
-    <el-table v-loading="loading" :data="data" size="small" border style="width: 100%;">
+    <el-table v-loading="loading" stripe="true" :data="data" size="small" border style="width: 100%;">
         <el-table-column label="详情" width="50px">
             <el-table-column prop="voucher_number" label="凭证编号" width="120px" />
             <el-table-column prop="customer_name" label="客户名" width="90px" />

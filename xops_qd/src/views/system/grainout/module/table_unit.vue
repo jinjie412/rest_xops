@@ -1,5 +1,5 @@
 <template>
-<el-table v-loading="sup_this.loading" :data="sup_this.data" size="small" border :summary-method="getSummaries" show-summary style="width: 100%">
+<el-table v-loading="sup_this.loading" stripe="true" :data="sup_this.data" size="small" border :summary-method="getSummaries" show-summary style="width: 100%">
     <el-table-column prop="customer_name" label="客户名" width="180">
     </el-table-column>
     <el-table-column prop="sum_net" label="总净重(吨)">
