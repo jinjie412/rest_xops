@@ -14,7 +14,7 @@
     <!-- 新增 -->
     <div style="display: inline-block;margin: 0px 2px;">
         <el-button v-if="checkPermission(['admin','user_all','user_create'])" class="filter-item" size="mini" type="primary" icon="el-icon-plus" @click="$refs.form.dialog = true; getOrgUserTree()">新增</el-button>
-        <eForm ref="form" :roles="roles" :organizations="organizations" :orgusers="orgusers" :is-add="true" />
+        <eForm ref="form"  :orgusers="orgusers" :is-add="true" />
     </div>
     <!-- 导出 -->
     <el-button v-if="checkPermission(['admin'])" :loading="downloadLoading" size="mini" class="filter-item" type="primary" icon="el-icon-download" style="display: inline-block;margin: 0px 20px;float: right" @click="download">导出</el-button>
@@ -33,14 +33,7 @@ export default {
         eForm
     },
     props: {
-        organizations: {
-            type: Array,
-            required: true
-        },
-        roles: {
-            type: Array,
-            required: true
-        },
+        
         query: {
             type: Object,
             required: true

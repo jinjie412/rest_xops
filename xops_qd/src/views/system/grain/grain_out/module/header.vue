@@ -10,7 +10,7 @@
     <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="toQuery">搜索</el-button>
     <div style="display: inline-block;margin: 0px 2px;">
         <el-button v-if="checkPermission(['admin','user_all','user_create'])" class="filter-item" size="mini" type="primary" icon="el-icon-plus" @click="$refs.form.dialog = true; getOrgUserTree()">新增</el-button>
-        <eForm ref="form" :roles="roles" :organizations="organizations" :orgusers="orgusers" :is-add="true" />
+        <eForm ref="form" :orgusers="orgusers" :is-add="true" />
     </div>
     <!-- 导出 -->
     <el-button v-if="checkPermission(['admin'])" :loading="downloadLoading" size="mini" class="filter-item" type="primary" icon="el-icon-download" style="display: inline-block;margin: 0px 20px;float: right" @click="download">导出</el-button>
@@ -29,14 +29,6 @@ export default {
         eForm
     },
     props: {
-        organizations: {
-            type: Array,
-            required: true
-        },
-        roles: {
-            type: Array,
-            required: true
-        },
         query: {
             type: Object,
             required: true
@@ -82,8 +74,8 @@ export default {
         download() {
             this.downloadLoading = true
             import('@/vendor/Export2Excel').then(excel => {
-                const tHeader = ['ID', '用户名', '邮箱', '头像地址', '状态', '注册日期', '最后修改密码日期']
-                const filterVal = ['id', 'username', 'email', 'avatar', 'createTime', 'lastPasswordResetTime']
+                const tHeader = ['凭证编号', '客户名', '手机', '毛重(吨)', '皮重(吨)', '净重(吨)', '单价', '应付款', '款项', '已付款', '创建时间', '更新时间']
+                const filterVal = ['voucher_number', 'customer_name', 'mobile', 'gross_weight', 'vehicle_weight', 'net_weight', 'unit_price', 'amount_pay', 'pay_name', 'actual_pay', 'invoice_date', 'update_time']
                 const data = this.formatJson(filterVal, this.$parent.data)
                 excel.export_json_to_excel({
                     header: tHeader,

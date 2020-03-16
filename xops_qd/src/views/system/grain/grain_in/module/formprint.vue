@@ -1,6 +1,6 @@
 <template>
 <el-dialog :append-to-body="true" :visible.sync="dialog" :title="'打印票据'" width="850px">
-    <el-form ref="print" :model="form" :rules="rules" size="small" label-width="80px">
+    <el-form ref="print" :model="form" size="small" label-width="80px">
         <el-row v-show="isAdd === false">
             <el-col :span="12">
                 <el-form-item label="凭证编号" prop="voucher_number">
