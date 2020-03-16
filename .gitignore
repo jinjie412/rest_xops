@@ -120,3 +120,5 @@ dmypy.json
 migrations/
 db/
 .DS_Store
+logs/
+*.log

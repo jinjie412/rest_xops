@@ -80,7 +80,8 @@ class Warehous(ModelViewSet):
         
         if serializer.validated_data['naure'] == 1: #代存
             serializer.validated_data['amount_pay'] = 0
-            serializer.validated_data['unit_price'] = 0
+            serializer.validated_data['amount_pay'] = 0
+            serializer.validated_data['actual_pay'] = 0
         elif serializer.validated_data['naure'] == 0:#收购
             serializer.validated_data['amount_pay'] = Decimal(
                 serializer.validated_data['net_weight']) * Decimal(request.data['unit_price'])

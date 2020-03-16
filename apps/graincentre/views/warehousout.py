@@ -68,6 +68,8 @@ class Warehousout(ModelViewSet):
         
         if 1 == serializer.validated_data['pay']:
             serializer.validated_data['actual_pay'] = serializer.validated_data['amount_pay']
+        elif 0 == serializer.validated_data['pay']:
+            serializer.validated_data['actual_pay'] = 0
 
         self.perform_update(serializer)
         return XopsResponse('ppp')
