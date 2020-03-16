@@ -118,3 +118,5 @@ dmypy.json
 *.db
 *.pid
 migrations/
+db/
+.DS_Store

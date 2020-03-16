@@ -86,25 +86,12 @@ WSGI_APPLICATION = 'rest_xops.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'rest_xops',
-#         'HOST': 'localhost',
-#         'USER': 'root',
-#         'PASSWORD': '123456',
-#         'PORT': '3306',
-#         'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, './db/db/db.sqlite3'),
     }
 }
-# Password validation
-# https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -184,7 +171,6 @@ WORKSPACE = '/tmp/workspace/'
 # 日志
 BASE_LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -236,12 +222,50 @@ LOGGING = {
 
 }
 
-
 DATETIME_FORMAT = 'Y-m-d H:i:s'
  
 DATE_FORMAT = 'Y-m-d'
 
+#####################################
+# celery 设置
+#celery内容等消息的格式设置
+CELERY_ACCEPT_CONTENT = ['application/json',]
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+#celery时区设置，使用settings中TIME_ZONE同样的时区
+CELERY_TIMEZONE = TIME_ZONE
+########################################
 
+
+########################################
+#邮件发送设置
+########################################
+# MAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'jin412@foxmail.com' # 帐号
+# EMAIL_HOST_PASSWORD = 'wuvdjdnexlsxbgdi'  # 密码 wuvdjdnexlsxbgdi
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = 'beifen <jin412@foxmail.com>'
+
+EMAIL_HOST = 'smtp.sina.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'jinjie412@sina.cn' # 你的 QQ 账号
+EMAIL_HOST_PASSWORD = '177333f335bcad8b'
+EMAIL_USE_TLS = True # 这里必须是 True，否则发送不成功
+DEFAULT_FROM_EMAIL = '备份 <jinjie412@sina.cn>'
+EMAIL_TO = ['jinjie412@sina.cn', 'jin412@qq.com']
+EMAIL_SUBJECT = 'garin_db_bak'
+########################################
+
+
+########################################
+########################################
+#数据库备份设置
+DB_BAK_PATH = os.path.join(BASE_DIR, './db/bak'),
+#备份目录
+DB_PATH = DATABASES['default']['NAME']
+########################################
 
 
 
