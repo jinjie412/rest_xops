@@ -2,25 +2,25 @@
 <div class="app-container">
     <eHeader :query="query"/>
     <!--表格渲染-->
-    <el-table v-loading="loading" stripe="true" :data="data" size="small" border style="width: 100%;">
-        <el-table-column label="详情" width="50px">
-            <el-table-column prop="voucher_number" label="凭证编号" width="120px" />
-            <el-table-column prop="customer_name" label="客户名" width="90px" />
-            <el-table-column prop="mobile" label="手机" width="107px" />
-            <el-table-column prop="gross_weight" label="毛重(吨)" width="80px" />
-            <el-table-column prop="vehicle_weight" label="皮重(吨)" width="80px" />
-            <el-table-column prop="net_weight" label="净重(吨)" width="80px" />
-            <el-table-column prop="unit_price" label="单价" width="80px" />
-            <el-table-column prop="amount_pay" label="应付款" width="100px" />
-            <el-table-column prop="pay_name" label="款项" width="80px" />
-            <el-table-column prop="actual_pay" label="已付款" width="100px" />
-            <el-table-column prop="invoice_date" label="创建时间" width="140px" />
-            <el-table-column prop="update_time" label="更新时间" width="140px" />
+    <el-table v-loading="loading" stripe="true" :data="data" size="small" show-summary border style="width: 100%;">
+        <el-table-column label="详情" min-width="50px">
+            <el-table-column prop="voucher_number" label="凭证编号" min-width="120px" />
+            <el-table-column prop="customer_name" label="客户名" min-width="90px" />
+            <el-table-column prop="mobile" label="手机" min-width="107px" />
+            <el-table-column prop="gross_weight" label="毛重(吨)" min-width="80px" />
+            <el-table-column prop="vehicle_weight" label="皮重(吨)" min-width="80px" />
+            <el-table-column prop="net_weight" label="净重(吨)" min-width="80px" />
+            <el-table-column prop="unit_price" label="单价" min-width="80px" />
+            <el-table-column prop="amount_pay" label="应付款" min-width="100px" />
+            <el-table-column prop="pay_name" label="款项" min-width="80px" />
+            <el-table-column prop="actual_pay" label="已付款" min-width="100px" />
+            <el-table-column prop="invoice_date" label="创建时间" min-width="140px" />
+            <el-table-column prop="update_time" label="更新时间" min-width="140px" />
         </el-table-column>
-        <el-table-column label="操作" width="160px" align="center">
+        <el-table-column label="操作" min-width="160px" align="center">
             <template slot-scope="scope">
                 <edit v-if="checkPermission(['admin','user_all','user_edit'])" :data="scope.row" :sup_this="sup_this" />
-                <el-popover v-if="checkPermission(['admin','user_all','user_delete'])" :ref="scope.row.voucher_number" placement="top" width="180">
+                <el-popover v-if="checkPermission(['admin','user_all','user_delete'])" :ref="scope.row.voucher_number" placement="top" min-width="180">
                     <p>确定删除本条数据吗？所有关联的数据将会被清除</p>
                     <div style="text-align: right; margin: 0">
                         <el-button size="mini" type="text" @click="$refs[scope.row.voucher_number].doClose()">取消</el-button>
