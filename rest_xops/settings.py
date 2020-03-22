@@ -262,7 +262,8 @@ EMAIL_SUBJECT = 'garin_db_bak'
 ########################################
 ########################################
 #数据库备份设置
-DB_BAK_PATH = os.path.join(BASE_DIR, './db/bak'),
+DB_BAK_PATH = '/tmp/grain'
+# DB_BAK_PATH = os.path.join(BASE_DIR, './db/bak')
 #备份目录
 DB_PATH = DATABASES['default']['NAME']
 ########################################

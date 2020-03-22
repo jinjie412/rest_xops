@@ -24,7 +24,7 @@ info_logger = logging.getLogger('info')
 @periodic_task(run_every=crontab(minute='0-59/2'))
 def send_db_bak_email():
     try:
-        zbfn = zip_file(settings.DB_PATH, settings.DB_BAK_PATH[0])
+        zbfn = zip_file(settings.DB_PATH, settings.DB_BAK_PATH)
         s_time = time.strftime('%Y.%m.%d_%H.%M.%S', time.localtime(time.time()))
 
         # file_mail(zbfn, subject=settings.EMAIL_SUBJECT + "_" + s_time,
