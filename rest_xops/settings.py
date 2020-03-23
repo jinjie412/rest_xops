@@ -123,6 +123,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 }
+
 # redis 设置
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
@@ -234,6 +235,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 #celery时区设置，使用settings中TIME_ZONE同样的时区
 CELERY_TIMEZONE = TIME_ZONE
+
+CELERY_BROKER_URL = 'redis://redis:6379/1'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/1'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 ########################################
 
 
@@ -262,8 +270,8 @@ EMAIL_SUBJECT = 'garin_db_bak'
 ########################################
 ########################################
 #数据库备份设置
-DB_BAK_PATH = '/tmp/grain'
-# DB_BAK_PATH = os.path.join(BASE_DIR, './db/bak')
+DB_BAK_PATH = os.path.join(BASE_DIR, './db/bak')
+# DB_BAK_PATH = '/tmp/'
 #备份目录
 DB_PATH = DATABASES['default']['NAME']
 ########################################
