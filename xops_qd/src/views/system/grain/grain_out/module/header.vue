@@ -87,7 +87,9 @@ export default {
         },
         // 数据转换
         formatJson(filterVal, jsonData) {
-            return jsonData.map(v => filterVal.map(j => {}))
+            return jsonData.map(v => filterVal.map(j => {
+               return v[j] 
+            }))
         }
     }
 }

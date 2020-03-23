@@ -55,6 +55,7 @@ export default {
             loading: false,
             value: null,
             rangedate: [],
+            oldpara: 'aa',
             environments: [{
                     value: '出库详情',
                     key: 'detailEntry'
@@ -90,21 +91,57 @@ export default {
             if (active === 'unit_price_wheat') {
                 this.params['sub_warehous'] = 1
                 this.params['unit_price'] = true
+                if (this.oldpara !== 'unit_price_wheat'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)    
+                }
+                this.oldpara = 'unit_price_wheat'
             } else if (active === 'net_weight_wheat') {
                 this.params['sub_warehous'] = 1
                 this.params['net_weight'] = true
+                if (this.oldpara !== 'net_weight_wheat'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)    
+                }
+                this.oldpara = 'net_weight_wheat'
             } else if (active === 'naure_wheat') {
                 this.params['sub_warehous'] = 1
                 this.params['naure'] = true
+                if (this.oldpara !== 'naure_wheat'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)
+                }
+                this.oldpara = 'naure_wheat'
             } else if (active === 'unit_price_corn') {
                 this.params['sub_warehous'] = 0
                 this.params['unit_price'] = true
+                if (this.oldpara !== 'unit_price_corn'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)
+                }
+                this.oldpara = 'unit_price_corn'
             } else if (active === 'net_weight_corn') {
                 this.params['sub_warehous'] = 0
                 this.params['net_weight'] = true
+                if (this.oldpara !== 'net_weight_corn'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)    
+                }
+                this.oldpara = 'net_weight_corn'
             } else if (active === 'naure_corn') {
                 this.params['sub_warehous'] = 0
                 this.params['naure'] = true
+                if (this.oldpara !== 'naure_corn'){
+                    this.params['page'] = 1
+                }else{
+                    // console.log(this.oldpara)    
+                }
+                this.oldpara = 'naure_corn'
             }
 
             return true
