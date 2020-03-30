@@ -1,3 +1,20 @@
+在https://github.com/xufqing/rest_xops 基础上开发.
+
+
+正好想用django rest framework + vue element ui 的前后端分离技术开发一个粮站管理系统,现在具有基本功能.
+
+
+尚有注册功能,多用户功能未添加.
+
+
+Docker-compose部署部分.
+https://gitee.com/uucc/grainDocker
+
+demo地址: 
+http://106.54.84.176:8888
+
+
+账号:admin  密码:zzlzxg2020
 
 ----------------------------------------------------------------------
 
