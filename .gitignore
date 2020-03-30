@@ -115,12 +115,9 @@ dmypy.json
 .pyre/
 .idea
 .vscode/
-*.db
 *.pid
 migrations/
-db/
 .DS_Store
-logs/
 *.log
 *.bak
 *.dat
