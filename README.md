@@ -1,4 +1,4 @@
-在https://github.com/xufqing/rest_xops 基础上开发.
+在https://github.com/xufqing/rest_xops 基础上开发,狗尾续貂,见笑见笑.
 
 
 正好想用django rest framework + vue element ui 的前后端分离技术开发一个粮站管理系统,现在具有基本功能.
