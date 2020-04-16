@@ -170,11 +170,6 @@ export default {
                         trigger: "blur"
                     }
                 ],
-                mobile: [{
-                    // required: true,
-                    trigger: "blur",
-                    // validator: validPhone
-                }],
                 gross_weight: [{
                     required: true,
                     message: "毛重不能为空",
