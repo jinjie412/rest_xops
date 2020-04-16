@@ -74,7 +74,7 @@ export default {
         download() {
             this.downloadLoading = true
             import('@/vendor/Export2Excel').then(excel => {
-                const tHeader = ['凭证编号', '客户名', '手机', '毛重(吨)', '皮重(吨)', '净重(吨)', '单价', '应付款', '款项', '已付款', '创建时间', '更新时间']
+                const tHeader = ['凭证编号', '客户名', '手机', '毛重(千克)', '皮重(千克)', '净重(斤)', '单价', '应付款', '款项', '已付款', '创建时间', '更新时间']
                 const filterVal = ['voucher_number', 'customer_name', 'mobile', 'gross_weight', 'vehicle_weight', 'net_weight', 'unit_price', 'amount_pay', 'pay_name', 'actual_pay', 'invoice_date', 'update_time']
                 const data = this.formatJson(filterVal, this.$parent.data)
                 excel.export_json_to_excel({

@@ -22,24 +22,24 @@
         </el-row>
         <el-row>
             <el-col :span="8">
-                <el-form-item label="毛重(吨)" prop="gross_weight">
+                <el-form-item label="毛重(千克)" prop="gross_weight">
                     <el-input type="number" v-model.number="form.gross_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
-                <el-form-item label="皮重(吨)" prop="vehicle_weight">
+                <el-form-item label="皮重(千克)" prop="vehicle_weight">
                     <el-input type="number" v-model.number="form.vehicle_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
-                <el-form-item label="扣量(吨)" prop="sub_weight">
+                <el-form-item label="扣量(千克)" prop="sub_weight">
                     <el-input type="number" v-model.number="form.sub_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="12">
-                <el-form-item label="净重(吨)" prop="net_weight">
+                <el-form-item label="净重(斤)" prop="net_weight">
                     <el-input type="float" v-model="form.net_weight" readonly=true style="width: 300px;" />
                 </el-form-item>
             </el-col>
@@ -171,9 +171,9 @@ export default {
                     }
                 ],
                 mobile: [{
-                    required: true,
+                    // required: true,
                     trigger: "blur",
-                    validator: validPhone
+                    // validator: validPhone
                 }],
                 gross_weight: [{
                     required: true,
@@ -253,6 +253,8 @@ export default {
         doAdd() {
             this.form.sub_warehous = this.$store.state.grain.grain_type.sub_warehous
             this.form.customer_name = this.form.customer_name + this.$store.state.grain.grain_type.grain
+            if(this.form.mobile === '' || !this.form.mobile )
+            {this.form.mobile = "13888888888"}
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();

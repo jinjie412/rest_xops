@@ -22,12 +22,12 @@
         </el-row>
         <el-row>
             <el-col :span="12">
-                <el-form-item label="毛重(吨)" prop="gross_weight">
+                <el-form-item label="毛重(千克)" prop="gross_weight">
                     <el-input type="number" v-model.number="form.gross_weight" style="width: 300px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="12">
-                <el-form-item label="皮重(吨)" prop="vehicle_weight">
+                <el-form-item label="皮重(千克)" prop="vehicle_weight">
                     <el-input type="number" v-model.number="form.vehicle_weight" style="width: 300px;" />
                 </el-form-item>
             </el-col>

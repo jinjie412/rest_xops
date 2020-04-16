@@ -2,7 +2,7 @@
 <el-table stripe="true" v-loading="sup_this.loading" :data="sup_this.data" size="small" border :summary-method="getSummaries" show-summary style="width: 100%">
     <el-table-column prop="customer_name" label="客户名" width="180">
     </el-table-column>
-    <el-table-column prop="sum_net" label="总净重(吨)">
+    <el-table-column prop="sum_net" label="总净重(斤)">
     </el-table-column>
     <el-table-column prop="sum_amount_pay" sortable label="总应付金额">
     </el-table-column>
@@ -45,7 +45,7 @@ export default {
                         }
                     }, 0);
                     if (index == 1) {
-                        sums[index] += ' 吨';
+                        sums[index] += ' 斤';
                     }
                     else{
                         sums[index] += ' 元';

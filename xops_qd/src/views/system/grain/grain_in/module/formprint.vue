@@ -16,24 +16,24 @@
         </el-row>
         <el-row>
             <el-col :span="8">
-                <el-form-item label="毛重(吨)" prop="gross_weight">
+                <el-form-item label="毛重(千克)" prop="gross_weight">
                     <el-input class='nonebord' type="string" v-model.number="form.gross_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
-                <el-form-item label="皮重(吨)" prop="vehicle_weight">
+                <el-form-item label="皮重(千克)" prop="vehicle_weight">
                     <el-input class='nonebord' type="string" v-model.number="form.vehicle_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
-                <el-form-item label="扣量(吨)" prop="sub_weight">
+                <el-form-item label="扣量(千克)" prop="sub_weight">
                     <el-input class='nonebord' type="string" v-model.number="form.sub_weight" style="width: 150px;" />
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="12">
-                <el-form-item label="净重(吨)" prop="net_weight">
+                <el-form-item label="净重(斤)" prop="net_weight">
                     <el-input class='nonebord' type="float" v-model="form.net_weight" style="width: 250px;" />
                 </el-form-item>
             </el-col>

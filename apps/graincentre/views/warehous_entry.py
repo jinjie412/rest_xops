@@ -49,6 +49,9 @@ class WarehousEntryView(APIView):
                     raise CommonException('净重结果是负数,输入异常', 1003)
                 
                 request.data['net_weight'] = net_weight
+                print('net_weight:', net_weight)
+                net_weight = net_weight + net_weight
+                print('net_weight *2:', net_weight * 2)
                 request.data['amount_pay'] = Decimal(
                     net_weight) * Decimal(request.data['unit_price'])
                 verified_data = Serializer(data=request.data, many=False)

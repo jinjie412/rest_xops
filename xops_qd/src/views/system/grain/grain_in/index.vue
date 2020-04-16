@@ -7,10 +7,10 @@
             <el-table-column prop="voucher_number" label="凭证编号" min-width="120px" />
             <el-table-column prop="customer_name" label="客户名" min-width="100px" />
             <el-table-column prop="mobile" label="手机" min-width="105px" />
-            <el-table-column prop="gross_weight" label="毛重(吨)" min-width="64px" />
-            <el-table-column prop="vehicle_weight" label="皮重(吨)" min-width="64px" />
-            <el-table-column prop="sub_weight" label="扣量(吨)" min-width="64px" />
-            <el-table-column prop="net_weight" label="净重(吨)" min-width="64px" />
+            <el-table-column prop="gross_weight" label="毛重(千克)" min-width="64px" />
+            <el-table-column prop="vehicle_weight" label="皮重(千克)" min-width="64px" />
+            <el-table-column prop="sub_weight" label="扣量(千克)" min-width="64px" />
+            <el-table-column prop="net_weight" label="净重(斤)" min-width="64px" />
             <el-table-column prop="unit_price" label="单价" min-width="50px" />
             <el-table-column prop="amount_pay" label="应付款" min-width="85px" />
             <el-table-column prop="pay_name" label="款项" min-width="50px" />

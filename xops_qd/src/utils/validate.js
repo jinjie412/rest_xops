@@ -85,7 +85,7 @@ export function checkNaure(rule, value, callback) {
 }
 
 export function isDecimal(rule, value, callback) {
-  if (!value) {
+  if (!value && value != 0) {
     return callback(new Error("输入不可以为空c"));
   }
   setTimeout(() => {

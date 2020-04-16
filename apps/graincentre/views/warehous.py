@@ -49,6 +49,7 @@ class Warehous(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.validated_data['net_weight'] = request.data['gross_weight'] - \
             request.data['vehicle_weight'] - request.data['sub_weight']
+        serializer.validated_data['net_weight'] = serializer.validated_data['net_weight'] *2
         if serializer.validated_data['net_weight'] < 0:
             return XopsResponse('净重结果是负数,输入异常')
         
@@ -72,6 +73,7 @@ class Warehous(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.validated_data['net_weight'] = request.data['gross_weight'] - \
             request.data['vehicle_weight'] - request.data['sub_weight']
+        serializer.validated_data['net_weight'] = serializer.validated_data['net_weight'] *2
         if serializer.validated_data['net_weight'] < 0:
             return XopsResponse('净重结果是负数,输入异常')
         
