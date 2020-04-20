@@ -23,7 +23,7 @@
         <el-row>
             <el-col :span="8">
                 <el-form-item label="毛重(千克)" prop="gross_weight">
-                    <el-input type="number" v-model.number="form.gross_weight" style="width: 150px;" />
+                    <el-input type="number" v-model.number="form.gross_weight"  style="width: 150px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -33,7 +33,7 @@
             </el-col>
             <el-col :span="8">
                 <el-form-item label="扣量(千克)" prop="sub_weight">
-                    <el-input type="number" v-model.number="form.sub_weight" style="width: 150px;" />
+                    <el-input type="number" v-model.number="form.sub_weight" @change="handleChange" style="width: 150px;" />
                 </el-form-item>
             </el-col>
         </el-row>
@@ -44,7 +44,7 @@
                 </el-form-item>
             </el-col>
             <el-col :span="12">
-                <el-form-item label="单价(元)" prop="unit_price">
+                <el-form-item label="单价(元)"  prop="unit_price">
                     <el-input type="float" v-model="form.unit_price" style="width: 300px;" />
                 </el-form-item>
             </el-col>
@@ -179,7 +179,7 @@ export default {
                 vehicle_weight: [{
                     required: true,
                     message: "皮重不能为空",
-                    validator: checkWeightValue,
+                    validator: isDecimal,
                     trigger: "blur"
                 }],
                 sub_weight: [{
@@ -285,11 +285,25 @@ export default {
                     console.log(err);
                 });
         },
+        // handleChange() {
+        //     this.$nextTick(() => {
+        //         // 将计算方法放到这里，获取到的是更新之后的
+        //         this.form.net_weight = 0
+        //         if((this.form.gross_weight - this.form.vehicle_weight - this.form.sub_weight) *2)
+        //         {
+        //             this.form.net_weight = (this.form.gross_weight - this.form.vehicle_weight - this.form.sub_weight) *2 
+        //         }else{
+        //             this.form.net_weight = 0
+        //         }
+        //         console.log(this.form.net_weight)
+        //     });
+        // },
         resetForm() {
             this.dialog = false;
             this.$refs["form"].resetFields();
             this.form = {
                 customer_name: "",
+                net_weight: 0
             };
         }
     }
