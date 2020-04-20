@@ -150,11 +150,6 @@ export default {
                         trigger: "blur"
                     }
                 ],
-                mobile: [{
-                    required: true,
-                    trigger: "blur",
-                    validator: validPhone
-                }],
                 gross_weight: [{
                     required: true,
                     message: "毛重不能为空",
@@ -229,6 +224,8 @@ export default {
         doAdd() {
             this.form.sub_warehous = this.$store.state.grain.grain_type.sub_warehous
             this.form.customer_name = this.form.customer_name + this.$store.state.grain.grain_type.grain
+            if(this.form.mobile === '' || !this.form.mobile )
+            {this.form.mobile = "13888888888"}
             add(this.form, this.url_path)
                 .then(res => {
                     this.resetForm();
@@ -269,6 +266,8 @@ export default {
             this.$refs["form"].resetFields();
             this.form = {
                 customer_name: "",
+                net_weight: 0,
+                sub_weight:0
             };
         }
     }
