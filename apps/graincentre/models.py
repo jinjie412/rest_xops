@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-
+import django.utils.timezone as timezone
 import datetime
 
 class WarehousEntry(models.Model):
@@ -30,7 +30,7 @@ class WarehousEntry(models.Model):
     naure_choices = ((0, '收购'), (1, '代存'))
     naure = models.SmallIntegerField(choices=naure_choices, verbose_name='性质', default=0)
     customer_get_name = models.CharField(max_length=32, verbose_name='领取人', null=True, blank=True)
-    invoice_date = models.DateTimeField('开票时间', auto_now_add=True)
+    invoice_date = models.DateTimeField('开票时间', default = timezone.now)
     update_time = models.DateTimeField(auto_now=True, verbose_name='最后更改')
 
 class WarehousEntryResponse(models.Model):
@@ -69,9 +69,8 @@ class OutStock(models.Model):
     pay_choices = ((1,'付款'), (0, '欠账'))
     pay = models.SmallIntegerField(choices=pay_choices, verbose_name='款项', default=0)
     actual_pay = models.DecimalField(max_digits=16, decimal_places=2, verbose_name='实付金额', null=True, blank=True)
-    invoice_date = models.DateTimeField('出库时间', auto_now_add=True)
+    invoice_date = models.DateTimeField('出库时间', default = timezone.now)
     update_time = models.DateTimeField(auto_now=True, verbose_name='最后更改')
-
 
 class Stok_All(models.Model):
     '''
@@ -87,8 +86,6 @@ class Stok_All(models.Model):
     out_all = models.BigIntegerField(verbose_name='出库(吨)')
     now_all = models.BigIntegerField(verbose_name='余存(吨)')
 
-
-
 class UserInfo(models.Model):
     username = models.CharField("用户名", max_length=64, unique=True)
     password = models.CharField('password', max_length=128)
@@ -98,7 +95,6 @@ class UserInfo(models.Model):
 
     def __str__(self):
         return self.username
-
 
 class Token(models.Model):
     """

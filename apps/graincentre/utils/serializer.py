@@ -84,11 +84,12 @@ class SerializerEntryDetailResponsePayOut(serializers.ModelSerializer):
         fields = ('sum_net', 'pay')
 
 class SerializerPut(serializers.ModelSerializer):
+    invoice_date = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S')
     class Meta:
         model = WarehousEntry
         fields = ('customer_name', 'mobile', 'gross_weight', 'vehicle_weight',
                   'sub_weight', 'net_weight', 'unit_price', 'amount_pay',
-                  'pay', 'customer_get_name', 'naure')
+                  'pay', 'customer_get_name', 'naure', 'invoice_date')
 
 
 class SerializerPutW(serializers.ModelSerializer):

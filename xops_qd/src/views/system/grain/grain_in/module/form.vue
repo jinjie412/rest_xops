@@ -78,7 +78,7 @@
         <el-row v-show="isAdd === false">
             <el-col :span="12">
                 <el-form-item label="创建时间" prop="invoice_date">
-                    <el-input v-model="form.invoice_date" readonly="isAdd === false" style="width: 200px;" />
+                    <el-input v-model="form.invoice_date"  style="width: 200px;" />
                 </el-form-item>
             </el-col>
             <el-col :span="12">

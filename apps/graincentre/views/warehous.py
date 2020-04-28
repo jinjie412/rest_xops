@@ -17,6 +17,7 @@ from apps.graincentre.utils.serializer import (Serializer, SerializerCreat,
                                                SerializerPut)
 from rest_xops.basic import XopsResponse
 from rest_xops.code import *
+import time
 
 
 class Warehous(ModelViewSet):
@@ -45,6 +46,7 @@ class Warehous(ModelViewSet):
         rd = ''.join(random.sample(string.digits, 2))
         request.data['voucher_number'] = datetime.now().strftime(
             "%Y%m%d%H%M") + rd
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data['net_weight'] = request.data['gross_weight'] - \
@@ -68,6 +70,8 @@ class Warehous(ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         msg = '修改成功'
+        print(request.data)
+        print(kwargs)
         put_obj = WarehousEntry.objects.get(voucher_number=kwargs['pk'])
         serializer = self.get_serializer(data=request.data, instance=put_obj, many=False)
         serializer.is_valid(raise_exception=True)
@@ -94,7 +98,7 @@ class Warehous(ModelViewSet):
 
         if 1 == serializer.validated_data['pay'] and 0 == serializer.validated_data['naure']:
             if serializer.validated_data['unit_price'] == 0:
-                msg = "代存订单需要设定收购单间,才能付款"
+                msg = "代存订单需要设定收购单价,才能付款"
                 serializer.validated_data['actual_pay'] = 0
                 serializer.validated_data['pay'] = 0
             else:
@@ -108,5 +112,6 @@ class Warehous(ModelViewSet):
             msg = "设定欠账,已付款清零"
 
         self.perform_update(serializer)
+        print(serializer.data)
         return XopsResponse(serializer.data, msg=msg)
 
